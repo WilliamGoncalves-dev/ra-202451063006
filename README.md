@@ -2,7 +2,7 @@
 
 Repositório de exercícios práticos das disciplinas cursadas em **2026.2**.
 
-- Curso: <Programação Web>
+- Curso: <Sistemas de Informação>
 - Professor: Thalles Noce
 
 ## Disciplinas
