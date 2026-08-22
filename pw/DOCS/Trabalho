@@ -1,0 +1,29 @@
+# Proposta de Projeto — Programação Web 2026.2
+
+- **Aluno:** nome completo · **Curso/Turma:**
+- **Repositório:** URL
+
+## 1. Tema e problema
+Duas a quatro frases: que problema o site resolve e para quem.
+
+## 2. Público-alvo
+Quem usa e em que situação.
+
+## 3. Coleção de itens
+Qual é a coleção (mín. 8 itens) e quais atributos cada item tem.
+Exemplo de um item preenchido.
+
+## 4. Telas previstas
+Lista das telas (mín. 3): o que cada uma mostra.
+
+## 5. Formulário
+Qual formulário existe, quais campos e que validações terá.
+
+## 6. Filtro/busca
+Por qual critério o usuário filtra ou busca a coleção.
+
+## 7. Origem dos dados na Fase 2
+API pública (qual, com link), API própria ou mock local (json-server / JSON estático).
+
+## 8. Diferencial pretendido
+O que este projeto terá além do piso obrigatório.
