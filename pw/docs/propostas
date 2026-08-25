@@ -1,1 +1,135 @@
+Proposta de Projeto — Programação Web 2026.2
 
+Aluno: William Douglas Candido Goncalves
+
+Curso/Turma: GNP0542 - Programação Web
+
+1. Tema e problema
+
+O projeto propõe uma plataforma web voltada para jogadores de futebol que buscam oportunidades de participação em peneiras e processos de avaliação. O site permitirá consultar peneiras disponíveis, visualizar informações detalhadas sobre cada oportunidade e realizar uma inscrição informando o perfil esportivo do atleta. O objetivo é facilitar a descoberta de oportunidades compatíveis com características como idade, posição, pé dominante e município de residência.
+
+2. Público-alvo
+
+Jogadores de futebol, principalmente jovens atletas e aspirantes a jogadores profissionais, que procuram peneiras e avaliações em clubes ou projetos esportivos. A plataforma será voltada também para atletas que desejam encontrar oportunidades de acordo com sua faixa etária, posição e localização.
+
+3. Coleção de itens
+
+A coleção principal será formada por peneiras de futebol disponíveis para inscrição.
+
+Cada peneira poderá possuir, entre outros, os seguintes atributos:
+
+nome da peneira;
+
+clube ou organização responsável;
+
+data;
+
+município e local;
+
+categoria/faixa etária;
+
+posições procuradas;
+
+pé dominante aceito;
+
+número de vagas;
+
+status da oportunidade.
+
+A coleção terá pelo menos 8 registros.
+
+Exemplo de item preenchido:
+
+Nome: Seletiva Sub-20 de Belo Horizonte
+
+Organização: Academia Futebol Mineiro
+
+Data: 12/09/2026
+
+Município: Belo Horizonte
+
+Categoria: Sub-20
+
+Posições: Meia, ponta e atacante
+
+Pé dominante: Livre
+
+Vagas: 30
+
+Status: Inscrições abertas
+
+4. Telas previstas
+
+4.1 Página inicial
+
+Apresentará a proposta da plataforma, orientações para os atletas e algumas peneiras em destaque, além de acesso para a listagem completa e para o formulário de inscrição.
+
+4.2 Página de peneiras
+
+Apresentará a coleção de peneiras em formato de cards, permitindo consultar e filtrar as oportunidades disponíveis por critérios como município, categoria, posição, pé dominante e status.
+
+4.3 Página de detalhe da peneira
+
+Apresentará as informações completas de uma peneira específica, incluindo data, local, categoria, posições procuradas, requisitos e informações para inscrição.
+
+4.4 Formulário de inscrição
+
+Permitirará ao atleta informar seus dados pessoais e esportivos e selecionar uma peneira para a qual deseja se candidatar.
+
+5. Formulário
+
+O formulário de inscrição deverá possuir pelo menos 5 campos e utilizar validação nativa do HTML5.
+
+Campos previstos:
+
+nome completo;
+
+data de nascimento;
+
+município de residência;
+
+pé dominante;
+
+posição principal;
+
+posição secundária;
+
+altura;
+
+clube atual ou último clube;
+
+link para vídeo de apresentação;
+
+peneira desejada.
+
+As validações poderão utilizar atributos como required, tipos adequados de input e, quando necessário, pattern.
+
+6. Filtro/busca
+
+A página de peneiras permitirá filtrar a coleção por critérios relevantes ao perfil do atleta, como:
+
+município;
+
+categoria/faixa etária;
+
+posição;
+
+pé dominante;
+
+status da inscrição.
+
+Também poderá existir uma busca textual pelo nome da peneira ou organização responsável.
+
+7. Origem dos dados na Fase 2
+
+Na Fase 1, os dados poderão ser mantidos localmente para a construção e demonstração da interface.
+
+Na Fase 2, a intenção é utilizar um mock local servido por JSON Server ou arquivo JSON servido, permitindo consumir os dados por fetch e aplicar useEffect no projeto React, conforme os requisitos da disciplina.
+
+8. Diferencial pretendido
+
+O diferencial pretendido é apresentar as peneiras não apenas como uma lista de oportunidades, mas como oportunidades que podem ser encontradas de acordo com o perfil esportivo do atleta.
+
+A evolução pretendida é permitir que informações como ano de nascimento, posição, pé dominante e município ajudem o usuário a identificar peneiras potencialmente compatíveis com seu perfil.
+
+A proposta também pretende priorizar acessibilidade, responsividade e organização semântica do HTML, de forma que o projeto não seja apenas visualmente funcional, mas também estruturado de acordo com as práticas trabalhadas na disciplina.
