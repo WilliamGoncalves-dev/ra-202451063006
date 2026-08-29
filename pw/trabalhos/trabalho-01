@@ -92,4 +92,75 @@
 
 </body>
 
+<section id="peneiras-perto-de-mim" aria-labelledby="titulo-peneiras">
+  <h2 id="titulo-peneiras">Peneiras Perto de Mim</h2>
+
+  <form class="filtro-peneiras">
+    <div class="campo">
+      <label for="estado">Estado</label>
+      <select id="estado" name="estado">
+        <option>Minas Gerais</option>
+        <option>São Paulo</option>
+        <option>Rio de Janeiro</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="cidade">Cidade</label>
+      <select id="cidade" name="cidade">
+        <option>Nova Lima</option>
+        <option>Juiz de Fora</option>
+        <option>Campinas</option>
+      </select>
+    </div>
+  </form>
+
+  <ul class="lista-peneiras">
+    <li>
+      <article class="card-peneira">
+        <div class="topo-card">
+          <h3>Vila Nova FC</h3>
+          <span class="status status-andamento">Em andamento</span>
+        </div>
+
+        <p><strong>Local:</strong> Nova Lima · MG</p>
+        <p><strong>Faixa:</strong> 2008 a 2014</p>
+        <p>Treino de força, fundamentos e resistência física.</p>
+
+        <button type="button">Tenho interesse</button>
+      </article>
+    </li>
+
+    <li>
+      <article class="card-peneira">
+        <div class="topo-card">
+          <h3>Tupi</h3>
+          <span class="status status-criada">Criada</span>
+        </div>
+
+        <p><strong>Local:</strong> Juiz de Fora · MG</p>
+        <p><strong>Faixa:</strong> 2010 a 2012</p>
+        <p>Fundamentos defensivos, marcação e posicionamento.</p>
+
+        <button type="button">Tenho interesse</button>
+      </article>
+    </li>
+
+    <li>
+      <article class="card-peneira">
+        <div class="topo-card">
+          <h3>Palmeiras</h3>
+          <span class="status status-finalizada">Finalizada</span>
+        </div>
+
+        <p><strong>Local:</strong> Campinas · SP</p>
+        <p><strong>Faixa:</strong> 2014 a 2016</p>
+        <p>Finalização, passes e posicionamento em ataque.</p>
+
+        <button type="button">Tenho interesse</button>
+      </article>
+    </li>
+  </ul>
+</section>
 </html>
+-- Adição de campos para filtrar as peneiras e alteração das cores --
