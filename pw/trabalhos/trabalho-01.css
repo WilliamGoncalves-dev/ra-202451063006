@@ -1,1 +1,136 @@
+* { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, Segoe UI, Arial, sans-serif;
+      color: #1e293b;
+      background: #f5f7fa;
+      line-height: 1.6;
+    }
+    .topo, header { background: #155820; color: #ffffff; padding: 24px 32px 16px; }
+    .titulo-site, .site-nome { font-size: 26px; font-weight: 700; margin: 0 0 4px; }
+    .subtitulo-site { font-size: 14px; color: #fafafa; margin: 0; }
+    .menu, nav { background: #094609; padding: 10px 32px; }
+    .menu a, nav a { color: #ffffff; text-decoration: none; margin-right: 20px; font-size: 14px; }
+    .menu a:hover, nav a:hover { text-decoration: underline; }
+    .conteudo { display: flex; gap: 24px; padding: 28px 32px; align-items: flex-start; }
+    .miolo, main { flex: 1 1 auto; }
+    .lateral, aside {
+      flex: 0 0 250px; background: #ffffff; border: 1px solid #758dad;
+      border-radius: 6px; padding: 16px 20px;
+    }
+    .post, article {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 6px;
+      padding: 20px 24px; margin-bottom: 20px;
+    }
+    .titulo-g, h1 { font-size: 24px; font-weight: 700; color: #000000; margin: 0 0 12px; }
+    .titulo-m, h2 { font-size: 19px; font-weight: 700; color: #010502; margin: 0 0 10px; }
+    .titulo-p, h3 { font-size: 15px; font-weight: 700; color: #298b52; margin: 0 0 6px; }
+    .texto, p { margin: 0 0 12px; }
+    .lista, ul { margin: 0 0 12px; padding-left: 22px; }
+    .rodape, footer {
+      background: #185016; color: #aec3e0; padding: 18px 32px;
+      font-size: 13px; text-align: center;
+    }
+    .selo { display: inline-block; background: #eef3fa; color: #33641f;
+      border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
 
+      #peneiras-perto-de-mim {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.filtro-peneiras {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+}
+
+.campo label {
+  font-weight: 700;
+  color: #1f3864;
+  font-size: 14px;
+}
+
+.campo select {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.lista-peneiras {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.card-peneira {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 18px;
+  background: #f8fbff;
+}
+
+.topo-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.card-peneira h3 {
+  margin: 0;
+  color: #1f3864;
+}
+
+.card-peneira p {
+  margin: 6px 0;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-andamento {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.status-criada {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-finalizada {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.card-peneira button {
+  margin-top: 10px;
+  border: none;
+  background: #2e75b6;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
