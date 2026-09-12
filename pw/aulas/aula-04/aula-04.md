@@ -113,23 +113,28 @@ Volte ao quiz do início da aula. Agora não é para adivinhar: conte os id, as 
 ```text
 cx  seletor vencedor            especificidade   cor final
 --  --------------------------  --------------   ---------
- 1  __________________________  (_ , _ , _)      _________
- 2  __________________________  (_ , _ , _)      _________
- 3  __________________________  (_ , _ , _)      _________
- 4  __________________________  (_ , _ , _)      _________
- 5  __________________________  (_ , _ , _)      _________
- 6  __________________________  (_ , _ , _)      _________
- 7  __________________________  (_ , _ , _)      _________
- 8  __________________________  (_ , _ , _)      _________
-```
+ 1  #alvo1____________________  (1 , 0 , 0)      _verde_
+ 2  #c2 p_____________________  (1 , 0 , 1)      _vermelho_
+ 3  .empate___________________  (0 , 1 , 0)      _verde_
+ 4  style inline______________  (1 , 0 , 0 ,0)   _vermelho_
+ 5  !important________________  (_ , _ , _)      _verde__
+ 6  .a6.b6____________________  (0 , 2 , 0)      _verde__
+ 7  #c7_______________________  (_ , _ , _)      _verde___
+ 8  .card8 .destaque8 span____  (0 , 2 , 1)      _vermelho_
 
 **Sua análise:**
 
 1. Na caixa 2, por que a regra com class perdeu para a regra com id + elemento?
 
+R: A regra .verde2 perdeu porque sua especificidade (0,1,0) é menor que a especificidade de #c2 p, que é (1,0,1). O ID tem peso maior na comparação da especificidade.
+
 2. Nas caixas 3, o que decidiu o resultado, se a especificidade era igual nas duas regras?
 
+A ordem de declaração das regras
+
 3. Na caixa 7 nenhuma regra mirava o parágrafo. Então de onde veio a cor dele?
+
+R: A cor veio do elemento pai #c7. Ele herdou a cor definida no pai.
 
 ## RODADA 04 — A caixa é maior do que você pediu
 
@@ -149,16 +154,22 @@ Todo elemento é uma caixa com quatro camadas. O diagrama do DevTools mostra as 
                 |  |  |  +---------+  |  |  |
 
 largura total ocupada = content + padding*2 + border*2 + margin*2
-                      = ______ px
+                      = 710X9737.938_ px
 ```
 
 **Sua análise:**
 
 1. Qual camada empurra os elementos vizinhos para longe, sem pintar nada?
 
+R: A camada Margin  
+
 2. Qual camada aumenta a área clicável do elemento junto com o fundo?
 
+R: O padding
+
 3. A largura que aparece em width no CSS é a mesma que o elemento ocupa na tela?
+
+R: Sim, pois temos o box-sizing = border box
 
 ## RODADA 05 — O experimento do box-sizing
 
