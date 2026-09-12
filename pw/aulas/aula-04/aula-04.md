@@ -178,22 +178,28 @@ R: Sim, pois temos o box-sizing = border box
 Troque box-sizing entre content-box e border-box e observe o elemento na tela. Registre a diferença:
 
 ```text
-width declarado no CSS: ______ px
+width declarado no CSS: _771x215 px
 
-box-sizing: content-box  ->  largura na tela: ______ px
-box-sizing: border-box   ->  largura na tela: ______ px
+box-sizing: content-box  ->  largura na tela: 856x215_ px
+box-sizing: border-box   ->  largura na tela: 771x215_ px
 
-diferenca entre as duas: ______ px
-essa diferenca corresponde a que camadas? ____________________
+diferenca entre as duas: 85_ px
+essa diferenca corresponde a que camadas? padding___
 ```
 
 **Sua análise:**
 
 1. Com qual dos dois valores a largura na tela é igual à largura que você declarou?
 
+R: border-box
+
 2. Por que quase todo projeto começa o CSS com a regra * { box-sizing: border-box }?
 
+R: Porque torna o cálculo do tamanho dos elementos muito mais previsível.
+
 3. Se você somar padding a um elemento com border-box, o que muda de tamanho: a caixa ou o conteúdo dentro dela?
+
+R: A caixa mantém o tamanho declarado, e o conteúdo interno diminui.
 
 ## 🏆 DESAFIO BÔNUS
 
