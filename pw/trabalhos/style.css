@@ -229,3 +229,14 @@ ol { margin: 0 0 12px; padding-left: 22px; }
   min-height: 16px;
 }
 
+.campo .dica,
+.campo .erro {
+  margin: 0;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
