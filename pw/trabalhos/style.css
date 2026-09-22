@@ -179,3 +179,45 @@ textarea:focus-visible {
   outline: 3px solid #facc15;
   outline-offset: 2px;
 }
+
+/* A landing page não usa a estrutura de duas colunas,
+   então o main precisa do respiro que o .conteudo dava */
+main {
+  padding: 28px 32px;
+  max-width: 900px;   /* linha muito longa cansa a leitura */
+}
+
+/* .conteudo continua valendo na peneiras.html, que tem aside */
+
+section {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.abertura {
+  border-left: 6px solid #155820;
+}
+
+.botao {
+  display: inline-block;
+  background: #155820;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.botao:hover { background: #0f3d17; text-decoration: underline; }
+
+.botao-secundario {
+  background: #ffffff;
+  color: #14532d;
+  border: 2px solid #155820;
+}
+.botao-secundario:hover { background: #eef3ee; }
+
+ol { margin: 0 0 12px; padding-left: 22px; }
