@@ -27,12 +27,12 @@
 
   <form id="form-inscricao" novalidate>
 
-    -- novalidate no <form> — parece contraditório num formulário que quer validação, 
+    <!-- novalidate no <form> — parece contraditório num formulário que quer validação, 
         mas o motivo é técnico: o navegador tem validação nativa (a bolha de aviso do HTML), 
         só que ela varia de aparência entre Chrome, Firefox e Safari e não é bem anunciada por 
         todo leitor de tela. Como vamos fazer nossa própria mensagem de erro (mais previsível e acessível), 
         desligamos a bolha nativa com novalidate e cuidamos da validação via JavaScript. 
-        Os atributos required, type, minlength etc. continuam funcionando — só a bolha visual que some.
+        Os atributos required, type, minlength etc. continuam funcionando — só a bolha visual que some.-->
 
     <fieldset>
       <legend>Dados do atleta</legend>
@@ -63,7 +63,7 @@
         <p class="erro" id="erro-telefone" role="alert"></p>
       </div>
 
-      -- <fieldset> + <legend> — o <legend> é o "título" do grupo. Quando o foco entra no primeiro campo do fieldset, o leitor de tela anuncia "Dados do atleta, Nome completo, campo de texto". Sem isso, o usuário só ouve "Nome completo, campo de texto" e não sabe que está no bloco de dados pessoais — importa mais ainda quando o formulário tem vários fieldsets parecidos.
+      <!-- <fieldset> + <legend> — o <legend> é o "título" do grupo. Quando o foco entra no primeiro campo do fieldset, o leitor de tela anuncia "Dados do atleta, Nome completo, campo de texto". Sem isso, o usuário só ouve "Nome completo, campo de texto" e não sabe que está no bloco de dados pessoais — importa mais ainda quando o formulário tem vários fieldsets parecidos.
 
 for no <label> = id no <input> — essa é a ligação mais importante do formulário inteiro. Ela faz três coisas: (1) o leitor de tela lê o rótulo ao focar o campo; (2) clicar no texto do <label> foca ou marca o campo, o que aumenta muito a área clicável, especialmente em celular; (3) é o que valida no W3C. Todo campo do formulário segue esse par.
 
@@ -73,7 +73,7 @@ autocomplete="name", "bday", "email", "tel" — são valores padronizados que o 
 
 <p class="erro" role="alert"> vazio, um por campo — fica vazio até o JavaScript escrever a mensagem nele. role="alert" faz o leitor de tela anunciar automaticamente qualquer texto que apareça ali, sem precisar que o foco esteja no elemento. É a peça central de "erro anunciado, não só colorido".
 
-<p class="dica"> no e-mail — dica que não é erro, só contexto. Ela precisa estar linkada ao campo via aria-describedby (vem no próximo passo, junto com o JS) para que o leitor de tela a leia como parte da descrição do campo. --
+<p class="dica"> no e-mail — dica que não é erro, só contexto. Ela precisa estar linkada ao campo via aria-describedby (vem no próximo passo, junto com o JS) para que o leitor de tela a leia como parte da descrição do campo. -->
 
     </fieldset>
 
@@ -107,13 +107,13 @@ autocomplete="name", "bday", "email", "tel" — são valores padronizados que o 
       </fieldset>
     </fieldset>
 
-    -- Por que <select> para posição e não texto livre — sete posições possíveis, valor fechado. Texto livre geraria "Zagueiro", "zagueiro", "ZAGA", "defensor" — dado sujo que ninguém consegue filtrar depois. Campo fechado só se justifica quando as opções são finitas e conhecidas, que é exatamente o caso aqui.
+    <!-- Por que <select> para posição e não texto livre — sete posições possíveis, valor fechado. Texto livre geraria "Zagueiro", "zagueiro", "ZAGA", "defensor" — dado sujo que ninguém consegue filtrar depois. Campo fechado só se justifica quando as opções são finitas e conhecidas, que é exatamente o caso aqui.
 
 <option value="">Selecione...</option> como primeira opção — sem ela, o <select> já nasce com a primeira posição real selecionada (Goleiro), e alguém que não prestar atenção envia o formulário com posição errada sem perceber. Com a opção vazia, o campo começa "sem resposta" de verdade, e o required consegue barrar o envio até o usuário escolher.
 
 Radio dentro de <fieldset> próprio, aninhado no de fora — pergunta de sim/não é, por natureza, um grupo de opções (o usuário escolhe uma entre duas), então merece seu próprio <legend> explicando a pergunta. Repare que name="experiencia" é igual nos dois <input> — é isso que faz o navegador tratá-los como um grupo exclusivo (marcar um desmarca o outro). Só o primeiro rádio do grupo precisa de required — o navegador entende que a exigência vale para o grupo inteiro.
 
-<label> envolvendo o <input> do radio, em vez de <label for="..."> separado — funciona igual, é só uma forma mais curta de escrever quando o campo é pequeno (radio/checkbox). Ganho prático: a área clicável vira o texto inteiro "Sim" / "Não", não só o círculo minúsculo.
+<label> envolvendo o <input> do radio, em vez de <label for="..."> separado — funciona igual, é só uma forma mais curta de escrever quando o campo é pequeno (radio/checkbox). Ganho prático: a área clicável vira o texto inteiro "Sim" / "Não", não só o círculo minúsculo. -->
 
     <fieldset>
       <legend>Peneira de interesse</legend>
@@ -147,11 +147,11 @@ Radio dentro de <fieldset> próprio, aninhado no de fora — pergunta de sim/nã
 
 </section>
 
--- O <select> de peneira replica os três clubes que já existem em peneiras.html. Isso é dado duplicado — problema conhecido de manter dois lugares com a mesma lista manualmente. Para o escopo da disciplina, duplicar é aceitável (o professor não pediu backend/banco de dados). Se quiser deixar isso mencionado como limitação consciente na documentação do projeto, é um bom ponto a favor seu: mostra que você enxergou o problema mesmo sem resolvê-lo.
+<!-- O <select> de peneira replica os três clubes que já existem em peneiras.html. Isso é dado duplicado — problema conhecido de manter dois lugares com a mesma lista manualmente. Para o escopo da disciplina, duplicar é aceitável (o professor não pediu backend/banco de dados). Se quiser deixar isso mencionado como limitação consciente na documentação do projeto, é um bom ponto a favor seu: mostra que você enxergou o problema mesmo sem resolvê-lo.
 
 role="status" aria-live="polite" na mensagem final — diferente do role="alert" dos erros de campo (que interrompe o usuário imediatamente), esse aqui é "educado": anuncia a mensagem de sucesso sem cortar o que o leitor de tela estiver narrando naquele instante. Faz sentido porque erro de campo precisa de atenção imediata; confirmação de envio, não.
 
-type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a ação é "processar o formulário", não navegar para outra página. É o inverso do botão da landing page.
+type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a ação é "processar o formulário", não navegar para outra página. É o inverso do botão da landing page. -->
 
 
 
@@ -235,6 +235,15 @@ type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a aç
       document.getElementById(nomeCampo).removeAttribute('aria-invalid');
     });
   });
+
+  /* Por que um objeto regras em vez de sete if soltos — é a diferença entre código que cresce bem e código que vira uma escada de if. Se amanhã você adicionar um oitavo campo obrigatório, é uma linha nova no objeto regras e uma no mensagensErro, não mais um bloco de if inteiro copiado. Não é obrigatório fazer assim — um formulário desse tamanho funcionaria também com if repetido — mas esse padrão é o que separa "funciona" de "dá pra manter depois", e costuma ser bem visto em correção de trabalho.
+
+campo.validity.valid no e-mail — em vez de escrever uma expressão regular própria para validar formato de e-mail (fácil de errar e reinventar a roda), aproveitamos a validação nativa que o type="email" já faz por baixo dos panos. validity é um objeto que todo <input> tem, e .valid responde exatamente "esse valor passa nas regras desse tipo de campo?".
+
+evento.preventDefault() — sem essa linha, ao clicar em "Enviar", o navegador tentaria de fato submeter o formulário para algum servidor (que não existe aqui) e recarregaria a página, perdendo tudo. Como esse formulário ainda não tem backend, interceptamos o envio e simulamos o resultado na tela.
+
+formulario.reset() só depois de validar com sucesso — resetar antes de validar apagaria os dados que o usuário acabou de digitar errado, o que seria péssimo para quem cometeu um erro pequeno. O reset só acontece no caminho feliz. */
+
 </script>
 
 </body>
