@@ -1,84 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soccer Dream - Peneiras de Futebol</title>
-  <!--
-    PAGINA B — semantica
-    Mesmo conteudo e mesma aparencia da pagina-a.html, porem cada bloco usa o elemento
-    que diz o que ele E: header, nav, main, article, aside, footer, h1/h2/h3, p, ul.
-    O CSS abaixo e IDENTICO ao da pagina-a.html.
-    NAO altere o CSS de um arquivo sem alterar o do outro.
-  -->
-<link rel="stylesheet" href="style.css">
+  <title>Soccer Dream — Peneiras gratuitas de futebol</title>
+  <meta name="description" content="Projeto social que conecta jovens atletas a peneiras gratuitas de futebol em Minas Gerais e São Paulo.">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo</a>
 
   <header>
     <p class="site-nome">Soccer Dream</p>
     <p class="subtitulo-site">O sonho do futebol para aqueles que ousaram sonhar</p>
   </header>
 
-  <nav>
-    <a href="#inscricao-atleta">Inscrição do Atleta</a>
-    <a href="peneiras.html">Peneiras Perto de Mim</a>
-    <a href="#contato">Contato</a>
+  <nav aria-label="Menu principal">
+    <ul>
+      <li><a href="index.html" aria-current="page">Início</a></li>
+      <li><a href="peneiras.html">Peneiras Perto de Mim</a></li>
+      <li><a href="inscricao.html">Inscrição do Atleta</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
   </nav>
 
-  <div class="conteudo">
-    <main>
+  <main id="conteudo-principal">
 
-      <article>
-        <h1>Realize sua inscrição</h1>
-        <p>
-          Todas as peneiras inscritas nesse site não cobram taxa de inscrição (exceto a taxa de um kilo de alimento não perecível). O atleta deve levar somente o próprio material (chuteira, meião, caneleira e roupa apropriada, os coletes são distribuídos no dia). O Soccer Dream é um projeto 
-          social que visa dar oportunidade para jovens atletas que sonham em jogar futebol profissionalmente. Preencha o formulário de inscrição
-        </p>
-      </article>
-
-      <article id="inscricao-atleta">
-        <h2>Vila Nova FC</h2>
-        <h3>Todas as Posições · Nascidos entre 2008 e 2014 · Nova Lima · MG </h3>
-        <p>
-          Treino de força, fundamentos e resistência física.
-        </p>
-        <p class="selo">Em andamento</p>
-      </article>
-
-      <article>
-        <h2>Tupi</h2>
-        <h3>Zagueiros, Laterais e Meias · Nascidos entre 2010 e 2012 · Juiz de Fora · MG </h3>
-        <p>
-          Treino de força, fundamentos (interceptação, marcação defensiva, posicionamento) e resistência física.
-        </p>
-        <p class="selo">Criada</p>
-      </article>
-
-      <article>
-        <h2>Palmeiras</h2>
-        <h3>Atacantes, Alas e Meias · Nascidos entre 2014 e 2016 · Campinas · SP </h3>
-        <p>
-          Treino de força, fundamentos (Finalização, Passes, posicionamento) e resistência física.
-        </p>
-        <p class="selo">Finalizada</p>
-      </article>
-
-    </main>
-
-    <aside>
-      <h3>Precisamos de ajuda</h3>
+    <!-- Bloco de abertura: diz em uma frase o que o site faz -->
+    <section class="abertura" aria-labelledby="titulo-abertura">
+      <h1 id="titulo-abertura">Sua chance de ser visto começa aqui</h1>
       <p>
-        Não conseguiu se inscrever ou quer ajudar o projeto? Doe um quilo de alimento não perecível e ajude a manter o projeto Soccer Dream.
+        O Soccer Dream é um projeto social que reúne peneiras gratuitas de futebol
+        e conecta jovens atletas a clubes de Minas Gerais e São Paulo. Sem taxa de
+        inscrição: apenas um quilo de alimento não perecível.
       </p>
-      <h3>Horário</h3>
-      <p>Seg a sex, 9h às 17h</p>
-    </aside>
-  </div>
+      <p>
+        <a class="botao" href="inscricao.html">Fazer minha inscrição</a>
+        <a class="botao botao-secundario" href="peneiras.html">Ver peneiras abertas</a>
+      </p>
+    </section>
+
+    <!-- Como funciona: passos em ordem, então lista ORDENADA -->
+    <section aria-labelledby="titulo-como-funciona">
+      <h2 id="titulo-como-funciona">Como funciona</h2>
+      <ol>
+        <li>Escolha uma peneira aberta na página <a href="peneiras.html">Peneiras Perto de Mim</a>.</li>
+        <li>Preencha o formulário de inscrição com seus dados e sua posição.</li>
+        <li>Receba a confirmação com data, horário e local da seleção.</li>
+        <li>Compareça com chuteira, meião, caneleira e um quilo de alimento não perecível.</li>
+        <li>Participe da avaliação de 30 a 60 minutos e receba o resultado no mesmo dia.</li>
+      </ol>
+    </section>
+
+    <!-- Quem somos -->
+    <section aria-labelledby="titulo-quem-somos">
+      <h2 id="titulo-quem-somos">Quem somos</h2>
+      <p>
+        O Soccer Dream nasceu em Belo Horizonte, em 2023, da percepção de que muitos
+        jovens talentosos nunca chegam a uma peneira por falta de informação ou por
+        não terem como pagar taxas de inscrição e deslocamento.
+      </p>
+      <p>
+        Hoje o projeto é mantido por voluntários — ex-atletas, treinadores e
+        estudantes — e organiza seleções em parceria com clubes das categorias de base.
+        Todo o alimento arrecadado é doado a instituições da região onde a peneira acontece.
+      </p>
+
+      <h3>Nossos números</h3>
+      <ul>
+        <li>Mais de 400 atletas avaliados desde 2023</li>
+        <li>12 clubes parceiros em MG e SP</li>
+        <li>Mais de 1,2 tonelada de alimentos arrecadada</li>
+      </ul>
+    </section>
+
+    <!-- Como ajudar -->
+    <section aria-labelledby="titulo-ajudar">
+      <h2 id="titulo-ajudar">Como ajudar</h2>
+      <p>
+        O projeto se mantém com trabalho voluntário e doações. Você pode contribuir
+        doando material esportivo, cedendo um campo para as seleções ou atuando como
+        avaliador nos dias de peneira. Entre em contato pelo e-mail no rodapé desta página.
+      </p>
+    </section>
+
+  </main>
 
   <footer id="contato">
-    Projeto Soccer Dream · Belo Horizonte/MG · contato@sdfutebol.org.br
+    Projeto Soccer Dream · Belo Horizonte/MG ·
+    <a href="mailto:contato@sdfutebol.org.br">contato@sdfutebol.org.br</a>
   </footer>
 
 </body>
 
+</html>
