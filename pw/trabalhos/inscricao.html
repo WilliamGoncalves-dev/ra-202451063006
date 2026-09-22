@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscrição do Atleta — Soccer Dream</title>
+  <meta name="description" content="Formulário de inscrição para peneiras gratuitas de futebol do Soccer Dream.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
 
   <!-- Link de atalho: primeiro elemento focável da página -->
@@ -51,7 +62,8 @@
 
       <div class="campo">
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" autocomplete="email" required>
+        <input type="email" id="email" name="email" autocomplete="email" required
+            aria-describedby="dica-email erro-email" required>
         <p class="dica" id="dica-email">Usaremos para enviar a confirmação da peneira.</p>
         <p class="erro" id="erro-email" role="alert"></p>
       </div>
@@ -168,7 +180,7 @@ type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a aç
     nome: campo => campo.value.trim().length >= 3,
     nascimento: campo => campo.value !== '',
     email: campo => campo.value.trim() !== '' && campo.validity.valid,
-    telefone: campo => campo.value.trim().length >= 14, // "(31) 91234-5678"
+    telefone: campo => /^\(\d{2}\) \d{5}-\d{4}$/.test(campo.value),
     posicao: campo => campo.value !== '',
     peneira: campo => campo.value !== '',
     termo: campo => campo.checked === true,
@@ -183,6 +195,28 @@ type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a aç
     peneira: 'Selecione a peneira de interesse.',
     termo: 'É necessário concordar com as diretrizes para continuar.',
   };
+
+  const telefone = document.getElementById('telefone');
+
+telefone.addEventListener('input', function () {
+  // Remove tudo que não for dígito — se a pessoa apagar um parêntese
+  // no meio, por exemplo, isso evita que a máscara quebre.
+  let numeros = telefone.value.replace(/\D/g, '');
+
+  // Limita a 11 dígitos (2 do DDD + 9 do celular)
+  numeros = numeros.slice(0, 11);
+
+  // Reconstrói o valor por etapas, conforme a quantidade de dígitos digitados
+  if (numeros.length > 6) {
+    telefone.value = numeros.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+  } else if (numeros.length > 2) {
+    telefone.value = numeros.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+  } else if (numeros.length > 0) {
+    telefone.value = numeros.replace(/(\d{0,2})/, '($1');
+  } else {
+    telefone.value = '';
+  }
+    });
 
   formulario.addEventListener('submit', function (evento) {
     evento.preventDefault();
