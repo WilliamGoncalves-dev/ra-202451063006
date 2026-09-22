@@ -178,7 +178,22 @@ type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a aç
   // Lista de campos que validamos manualmente, com a regra de cada um
   const regras = {
     nome: campo => campo.value.trim().length >= 3,
-    nascimento: campo => campo.value !== '',
+    nascimento: campo => {
+        if (campo.value === '') return false;
+
+        const hoje = new Date();
+     const nascimento = new Date(campo.value);
+
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+
+         // Verifica se o aniversário deste ano já aconteceu; se não, tira 1 ano
+         const aniversarioEsteAno = new Date(hoje.getFullYear(), nascimento.getMonth(), nascimento.getDate());
+         if (hoje < aniversarioEsteAno) {
+      idade--;
+     }
+
+        return idade >= 6;
+    },
     email: campo => campo.value.trim() !== '' && campo.validity.valid,
     telefone: campo => /^\(\d{2}\) \d{5}-\d{4}$/.test(campo.value),
     posicao: campo => campo.value !== '',
@@ -188,7 +203,7 @@ type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a aç
 
   const mensagensErro = {
     nome: 'Digite seu nome completo (mínimo 3 letras).',
-    nascimento: 'Informe sua data de nascimento.',
+    nascimento: 'É necessário ter pelo menos 6 anos completos para se inscrever.',
     email: 'Digite um e-mail válido.',
     telefone: 'Digite um telefone válido, com DDD.',
     posicao: 'Selecione sua posição principal.',
@@ -268,6 +283,8 @@ telefone.addEventListener('input', function () {
     Object.keys(regras).forEach(nomeCampo => {
       document.getElementById(nomeCampo).removeAttribute('aria-invalid');
     });
+
+    
   });
 
   /* Por que um objeto regras em vez de sete if soltos — é a diferença entre código que cresce bem e código que vira uma escada de if. Se amanhã você adicionar um oitavo campo obrigatório, é uma linha nova no objeto regras e uma no mensagensErro, não mais um bloco de if inteiro copiado. Não é obrigatório fazer assim — um formulário desse tamanho funcionaria também com if repetido — mas esse padrão é o que separa "funciona" de "dá pra manter depois", e costuma ser bem visto em correção de trabalho.
