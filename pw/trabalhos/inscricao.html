@@ -158,3 +158,83 @@ type="submit" no botão, dentro do <form> — aqui sim é <button>, porque a aç
 <footer id="contato">
     Projeto Soccer Dream · Belo Horizonte/MG · contato@sdfutebol.org.br
 </footer>
+
+<script>
+  const formulario = document.getElementById('form-inscricao');
+  const mensagemEnvio = document.getElementById('mensagem-envio');
+
+  // Lista de campos que validamos manualmente, com a regra de cada um
+  const regras = {
+    nome: campo => campo.value.trim().length >= 3,
+    nascimento: campo => campo.value !== '',
+    email: campo => campo.value.trim() !== '' && campo.validity.valid,
+    telefone: campo => campo.value.trim().length >= 14, // "(31) 91234-5678"
+    posicao: campo => campo.value !== '',
+    peneira: campo => campo.value !== '',
+    termo: campo => campo.checked === true,
+  };
+
+  const mensagensErro = {
+    nome: 'Digite seu nome completo (mínimo 3 letras).',
+    nascimento: 'Informe sua data de nascimento.',
+    email: 'Digite um e-mail válido.',
+    telefone: 'Digite um telefone válido, com DDD.',
+    posicao: 'Selecione sua posição principal.',
+    peneira: 'Selecione a peneira de interesse.',
+    termo: 'É necessário concordar com as diretrizes para continuar.',
+  };
+
+  formulario.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    let primeiroCampoComErro = null;
+
+    // Valida os campos simples (nome, nascimento, email, telefone, posição, peneira, termo)
+    for (const nomeCampo in regras) {
+      const campo = document.getElementById(nomeCampo);
+      const campoValido = regras[nomeCampo](campo);
+      const elementoErro = document.getElementById('erro-' + nomeCampo);
+
+      if (!campoValido) {
+        elementoErro.textContent = mensagensErro[nomeCampo];
+        campo.setAttribute('aria-invalid', 'true');
+        if (!primeiroCampoComErro) primeiroCampoComErro = campo;
+      } else {
+        elementoErro.textContent = '';
+        campo.removeAttribute('aria-invalid');
+      }
+    }
+
+    // Valida o grupo de radio (experiência), que não tem um único id
+    const experienciaSelecionada = formulario.querySelector('input[name="experiencia"]:checked');
+    const erroExperiencia = document.getElementById('erro-experiencia');
+    if (!experienciaSelecionada) {
+      erroExperiencia.textContent = 'Selecione uma opção.';
+      if (!primeiroCampoComErro) {
+        primeiroCampoComErro = formulario.querySelector('input[name="experiencia"]');
+      }
+    } else {
+      erroExperiencia.textContent = '';
+    }
+
+    // Se algo falhou, para aqui e leva o foco ao primeiro erro
+    if (primeiroCampoComErro) {
+      primeiroCampoComErro.focus();
+      mensagemEnvio.textContent = '';
+      return;
+    }
+
+    // Formulário válido — como não há backend nesta etapa do projeto,
+    // simulamos o envio confirmando na tela e limpando o formulário.
+    mensagemEnvio.textContent = 'Inscrição enviada com sucesso! Em breve você recebe a confirmação por e-mail.';
+    mensagemEnvio.classList.add('sucesso');
+    formulario.reset();
+
+    // Ao resetar, os aria-invalid e mensagens de erro somem também
+    Object.keys(regras).forEach(nomeCampo => {
+      document.getElementById(nomeCampo).removeAttribute('aria-invalid');
+    });
+  });
+</script>
+
+</body>
