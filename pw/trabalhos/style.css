@@ -24,11 +24,11 @@
     }
     .titulo-g, h1 { font-size: 24px; font-weight: 700; color: #000000; margin: 0 0 12px; }
     .titulo-m, h2 { font-size: 19px; font-weight: 700; color: #010502; margin: 0 0 10px; }
-    .titulo-p, h3 { font-size: 15px; font-weight: 700; color: #298b52; margin: 0 0 6px; }
+    .titulo-p, h3 { font-size: 15px; font-weight: 700; color: #14532d; margin: 0 0 6px; }
     .texto, p { margin: 0 0 12px; }
     .lista, ul { margin: 0 0 12px; padding-left: 22px; }
     .rodape, footer {
-      background: #185016; color: #aec3e0; padding: 18px 32px;
+      background: #185016; color: #ffffff; padding: 18px 32px;
       font-size: 13px; text-align: center;
     }
     .selo { display: inline-block; background: #eef3fa; color: #33641f;
@@ -133,4 +133,49 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: 700;
+}
+
+/* Link de atalho: escondido fora da tela até receber foco */
+.pular-conteudo {
+  position: absolute;
+  left: -9999px;
+  background: #ffffff;
+  color: #094609;
+  padding: 10px 16px;
+  z-index: 10;
+}
+.pular-conteudo:focus {
+  left: 8px;
+  top: 8px;
+}
+
+.menu, nav { background: #094609; padding: 10px 32px; }
+
+/* Tira marcador e recuo da lista, mantendo os itens na horizontal */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.menu a, nav a { color: #ffffff; text-decoration: none; font-size: 14px; }
+.menu a:hover, nav a:hover { text-decoration: underline; }
+
+/* Destaque visual do link da página atual */
+nav a[aria-current="page"] {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Foco visível em toda a página — nunca remova isso */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: 2px;
 }
