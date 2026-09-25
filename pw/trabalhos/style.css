@@ -155,14 +155,23 @@ main {
 .lista, ul { margin: 0 0 12px; padding-left: 22px; }
 ol { margin: 0 0 12px; padding-left: 22px; }
 
-footer a {
+/* ---- Rodapé ---- */
+.rodape, footer {
+  background: #185016;
   color: var(--cor-branco);
-}
-footer a:hover,
-footer a:focus-visible {
-  text-decoration: underline;
+  padding: var(--espaco-lg) var(--espaco-container);
+  font-size: var(--texto-sm);
+  text-align: center;
 }
 
+/* ---- Rodapé ---- */
+.rodape, footer {
+  background: #185016;
+  color: var(--cor-branco);
+  padding: var(--espaco-lg) var(--espaco-container);
+  font-size: var(--texto-sm);
+  text-align: center;
+}
 
 /* ---- Selo de status (peneiras.html, versão antiga em texto) ---- */
 .selo {
