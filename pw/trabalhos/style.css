@@ -1,52 +1,225 @@
-* { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, Segoe UI, Arial, sans-serif;
-      color: #1e293b;
-      background: #f5f7fa;
-      line-height: 1.6;
-    }
-    .topo, header { background: #155820; color: #ffffff; padding: 24px 32px 16px; }
-    .titulo-site, .site-nome { font-size: 26px; font-weight: 700; margin: 0 0 4px; }
-    .subtitulo-site { font-size: 14px; color: #fafafa; margin: 0; }
-    .menu, nav { background: #094609; padding: 10px 32px; }
-    .menu a, nav a { color: #ffffff; text-decoration: none; margin-right: 20px; font-size: 14px; }
-    .menu a:hover, nav a:hover { text-decoration: underline; }
-    .conteudo { display: flex; gap: 24px; padding: 28px 32px; align-items: flex-start; }
-    .miolo, main { flex: 1 1 auto; }
-    .lateral, aside {
-      flex: 0 0 250px; background: #ffffff; border: 1px solid #758dad;
-      border-radius: 6px; padding: 16px 20px;
-    }
-    .post, article {
-      background: #fff; border: 1px solid #e2e8f0; border-radius: 6px;
-      padding: 20px 24px; margin-bottom: 20px;
-    }
-    .titulo-g, h1 { font-size: 24px; font-weight: 700; color: #000000; margin: 0 0 12px; }
-    .titulo-m, h2 { font-size: 19px; font-weight: 700; color: #010502; margin: 0 0 10px; }
-    .titulo-p, h3 { font-size: 15px; font-weight: 700; color: #14532d; margin: 0 0 6px; }
-    .texto, p { margin: 0 0 12px; }
-    .lista, ul { margin: 0 0 12px; padding-left: 22px; }
-    .rodape, footer {
-      background: #185016; color: #ffffff; padding: 18px 32px;
-      font-size: 13px; text-align: center;
-    }
-    .selo { display: inline-block; background: #eef3fa; color: #33641f;
-      border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+/* ==========================================================================
+   DESIGN TOKENS — custom properties
+   Tudo abaixo é referenciado pelo resto do arquivo via var(--nome).
+   Mudar a identidade visual do site = mudar só esse bloco.
+   ========================================================================== */
+:root {
+  /* Cores */
+  --cor-primaria: #155820;
+  --cor-primaria-escura: #0f3d17;
+  --cor-nav: #094609;
+  --cor-destaque-texto: #14532d;
+  --cor-erro: #b91c1c;
+  --cor-fundo: #f5f7fa;
+  --cor-texto: #1e293b;
+  --cor-texto-dica: #475569;
+  --cor-borda: #e2e8f0;
+  --cor-borda-input: #cbd5e1;
+  --cor-branco: #ffffff;
+  --cor-selo-fundo: #eef3fa;
+  --cor-selo-texto: #33641f;
+  --cor-foco: #facc15;
+  --cor-status-andamento-fundo: #e0f2fe;
+  --cor-status-andamento-texto: #075985;
+  --cor-status-criada-fundo: #fef3c7;
+  --cor-status-criada-texto: #92400e;
+  --cor-status-finalizada-fundo: #dcfce7;
+  --cor-status-finalizada-texto: #166534;
+  --cor-botao-info: #2e75b6;
 
-      #peneiras-perto-de-mim {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 24px;
+  /* Tipografia */
+  --fonte-base: system-ui, "Segoe UI", Arial, sans-serif;
+  --texto-sm: 13px;
+  --texto-base: 15px;
+  --texto-md: 19px;
+  --texto-lg: 24px;
+  --texto-xl: 26px;
+
+  /* Espaçamento — os valores mudam dentro das media queries lá embaixo */
+  --espaco-container: 16px;
+  --espaco-sm: 8px;
+  --espaco-md: 16px;
+  --espaco-lg: 20px;
+  --espaco-xl: 24px;
+
+  /* Bordas */
+  --raio: 6px;
+  --raio-lg: 8px;
 }
+
+/* ==========================================================================
+   BASE — mobile-first: estas regras valem para QUALQUER largura de tela.
+   As media queries no final só ACRESCENTAM ajustes para telas maiores.
+   ========================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--fonte-base);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  line-height: 1.6;
+}
+
+/* ---- Cabeçalho ---- */
+.topo, header {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  padding: var(--espaco-xl) var(--espaco-container) var(--espaco-md);
+}
+.titulo-site, .site-nome { font-size: var(--texto-xl); font-weight: 700; margin: 0 0 4px; }
+.subtitulo-site { font-size: 14px; color: #fafafa; margin: 0; }
+
+/* ---- Link de atalho: escondido fora da tela até receber foco ---- */
+.pular-conteudo {
+  position: absolute;
+  left: -9999px;
+  background: var(--cor-branco);
+  color: var(--cor-nav);
+  padding: 10px var(--espaco-md);
+  z-index: 10;
+}
+.pular-conteudo:focus {
+  left: 8px;
+  top: 8px;
+}
+
+/* ---- Navegação (Flexbox: menu é uma lista em UMA dimensão) ---- */
+.menu, nav { background: var(--cor-nav); padding: 10px var(--espaco-container); }
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-lg);
+}
+
+.menu a, nav a {
+  color: var(--cor-branco);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 4px; /* área clicável confortável no toque, sem depender só da fonte */
+  display: inline-block;
+}
+.menu a:hover, nav a:hover { text-decoration: underline; }
+
+nav a[aria-current="page"] {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* ---- Foco visível em toda a página — nunca remova isso ---- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+/* ---- Layout de conteúdo (Flexbox: main + aside lado a lado, 1 dimensão) ---- */
+.conteudo { display: flex; flex-wrap: wrap; gap: var(--espaco-xl); padding: var(--espaco-xl) var(--espaco-container); align-items: flex-start; }
+.miolo, main { flex: 1 1 320px; }
+.lateral, aside {
+  flex: 1 1 100%;
+  background: var(--cor-branco);
+  border: 1px solid #758dad;
+  border-radius: var(--raio);
+  padding: var(--espaco-md) var(--espaco-lg);
+}
+
+main {
+  padding: var(--espaco-xl) var(--espaco-container);
+  max-width: 900px; /* linha muito longa cansa a leitura */
+}
+
+/* ---- Blocos de conteúdo ---- */
+.post, article, section {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: var(--espaco-lg) var(--espaco-xl);
+  margin-bottom: var(--espaco-xl);
+}
+
+.abertura { border-left: 6px solid var(--cor-primaria); }
+
+/* ---- Tipografia ---- */
+.titulo-g, h1 { font-size: var(--texto-lg); font-weight: 700; color: #000000; margin: 0 0 12px; }
+.titulo-m, h2 { font-size: var(--texto-md); font-weight: 700; color: #010502; margin: 0 0 10px; }
+.titulo-p, h3 { font-size: var(--texto-base); font-weight: 700; color: var(--cor-destaque-texto); margin: 0 0 6px; }
+.texto, p { margin: 0 0 12px; }
+.lista, ul { margin: 0 0 12px; padding-left: 22px; }
+ol { margin: 0 0 12px; padding-left: 22px; }
+
+/* ---- Rodapé ---- */
+.rodape, footer {
+  background: #185016;
+  color: var(--cor-branco);
+  padding: var(--espaco-lg) var(--espaco-container);
+  font-size: var(--texto-sm);
+  text-align: center;
+}
+
+/* ---- Selo de status (peneiras.html, versão antiga em texto) ---- */
+.selo {
+  display: inline-block;
+  background: var(--cor-selo-fundo);
+  color: var(--cor-selo-texto);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---- Botões-link (landing page) ---- */
+.botao {
+  display: inline-block;
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  text-decoration: none;
+  padding: 12px var(--espaco-xl);
+  border-radius: var(--raio);
+  font-weight: 700;
+  margin-right: var(--espaco-sm);
+}
+.botao:hover { background: var(--cor-primaria-escura); text-decoration: underline; }
+
+.botao-secundario {
+  background: var(--cor-branco);
+  color: var(--cor-destaque-texto);
+  border: 2px solid var(--cor-primaria);
+}
+.botao-secundario:hover { background: #eef3ee; }
+
+/* ==========================================================================
+   GRID — cards de peneiras e layout do formulário (2 dimensões: linha + coluna)
+   Mobile-first: 1 coluna por padrão; breakpoints abrem mais colunas.
+   ========================================================================== */
+#peneiras-perto-de-mim {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  padding: var(--espaco-xl);
+  margin-bottom: var(--espaco-xl);
+}
+
+.grade-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espaco-lg);
+  margin-top: var(--espaco-lg);
+}
+.grade-cards article { margin-bottom: 0; } /* o gap do grid já espaça, dispensa a margem individual */
 
 .filtro-peneiras {
   display: flex;
-  gap: 16px;
+  gap: var(--espaco-md);
   flex-wrap: wrap;
-  margin: 20px 0;
+  margin: var(--espaco-lg) 0;
 }
 
 .campo {
@@ -54,32 +227,83 @@
   flex-direction: column;
   gap: 6px;
   min-width: 180px;
+  margin-bottom: var(--espaco-lg);
 }
 
-.campo label {
-  font-weight: 700;
-  color: #1f3864;
-  font-size: 14px;
-}
+.campo label { font-weight: 700; color: #1f3864; font-size: 14px; }
 
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="tel"],
+.campo input[type="date"],
 .campo select {
+  width: 100%;
+  max-width: 420px;
   padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 14px;
+  border: 1px solid var(--cor-borda-input);
+  border-radius: var(--raio);
+  font-size: var(--texto-base);
 }
 
-.lista-peneiras {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.campo input[aria-invalid="true"],
+.campo select[aria-invalid="true"] {
+  border-color: var(--cor-erro);
+}
+
+.campo .dica,
+.campo .erro { margin: 0; }
+
+.dica { color: var(--cor-texto-dica); font-size: var(--texto-sm); }
+
+.erro {
+  color: var(--cor-erro);
+  font-size: var(--texto-sm);
+  min-height: 16px;
+}
+.erro:not(:empty) { font-weight: 700; }
+
+/* Grid do formulário — cada campo em .campo-largo ocupa a largura toda */
+.campos-grade {
   display: grid;
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 0 var(--espaco-lg);
+}
+.campo-largo { grid-column: 1 / -1; }
+
+.opcao-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: var(--espaco-lg);
+  font-weight: 400;
 }
 
+.campo-checkbox label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-sm);
+  font-weight: 400;
+}
+
+button[type="submit"] {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  border: none;
+  padding: 12px var(--espaco-xl);
+  border-radius: var(--raio);
+  font-size: var(--texto-base);
+  font-weight: 700;
+  cursor: pointer;
+}
+button[type="submit"]:hover { background: var(--cor-primaria-escura); }
+
+#mensagem-envio { margin-top: var(--espaco-md); font-weight: 700; }
+#mensagem-envio.sucesso { color: var(--cor-status-finalizada-texto); }
+
+/* ---- Cards de peneira (versão card completo, se você usar essa variante) ---- */
 .card-peneira {
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
   padding: 18px;
   background: #f8fbff;
 }
@@ -92,14 +316,8 @@
   margin-bottom: 10px;
 }
 
-.card-peneira h3 {
-  margin: 0;
-  color: #1f3864;
-}
-
-.card-peneira p {
-  margin: 6px 0;
-}
+.card-peneira h3 { margin: 0; color: #1f3864; }
+.card-peneira p { margin: 6px 0; }
 
 .status {
   display: inline-block;
@@ -108,135 +326,51 @@
   font-size: 12px;
   font-weight: 700;
 }
-
-.status-andamento {
-  background: #e0f2fe;
-  color: #075985;
-}
-
-.status-criada {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.status-finalizada {
-  background: #dcfce7;
-  color: #166534;
-}
+.status-andamento { background: var(--cor-status-andamento-fundo); color: var(--cor-status-andamento-texto); }
+.status-criada { background: var(--cor-status-criada-fundo); color: var(--cor-status-criada-texto); }
+.status-finalizada { background: var(--cor-status-finalizada-fundo); color: var(--cor-status-finalizada-texto); }
 
 .card-peneira button {
   margin-top: 10px;
   border: none;
-  background: #2e75b6;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 6px;
+  background: var(--cor-botao-info);
+  color: var(--cor-branco);
+  padding: 10px var(--espaco-md);
+  border-radius: var(--raio);
   cursor: pointer;
   font-weight: 700;
 }
 
-/* Link de atalho: escondido fora da tela até receber foco */
-.pular-conteudo {
-  position: absolute;
-  left: -9999px;
-  background: #ffffff;
-  color: #094609;
-  padding: 10px 16px;
-  z-index: 10;
-}
-.pular-conteudo:focus {
-  left: 8px;
-  top: 8px;
-}
+/* ==========================================================================
+   BREAKPOINT 1 — tablets a partir de 600px
+   ========================================================================== */
+@media (min-width: 600px) {
+  :root {
+    --espaco-container: 24px;
+  }
 
-.menu, nav { background: #094609; padding: 10px 32px; }
+  .grade-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-/* Tira marcador e recuo da lista, mantendo os itens na horizontal */
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  .campos-grade {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lateral, aside {
+    flex: 0 0 250px;
+  }
 }
 
-.menu a, nav a { color: #ffffff; text-decoration: none; font-size: 14px; }
-.menu a:hover, nav a:hover { text-decoration: underline; }
+/* ==========================================================================
+   BREAKPOINT 2 — telas grandes a partir de 900px
+   ========================================================================== */
+@media (min-width: 900px) {
+  :root {
+    --espaco-container: 32px;
+  }
 
-/* Destaque visual do link da página atual */
-nav a[aria-current="page"] {
-  text-decoration: underline;
-  font-weight: 700;
-}
-
-/* Foco visível em toda a página — nunca remova isso */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #facc15;
-  outline-offset: 2px;
-}
-
-/* A landing page não usa a estrutura de duas colunas,
-   então o main precisa do respiro que o .conteudo dava */
-main {
-  padding: 28px 32px;
-  max-width: 900px;   /* linha muito longa cansa a leitura */
-}
-
-/* .conteudo continua valendo na peneiras.html, que tem aside */
-
-section {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 20px 24px;
-  margin-bottom: 20px;
-}
-
-.abertura {
-  border-left: 6px solid #155820;
-}
-
-.botao {
-  display: inline-block;
-  background: #155820;
-  color: #ffffff;
-  text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-weight: 700;
-  margin-right: 8px;
-}
-.botao:hover { background: #0f3d17; text-decoration: underline; }
-
-.botao-secundario {
-  background: #ffffff;
-  color: #14532d;
-  border: 2px solid #155820;
-}
-.botao-secundario:hover { background: #eef3ee; }
-
-ol { margin: 0 0 12px; padding-left: 22px; }
-
-.erro {
-  color: #b91c1c;      /* vermelho escuro — passa em contraste */
-  font-size: 13px;
-  margin: 4px 0 0;
-  min-height: 16px;
-}
-
-.campo .dica,
-.campo .erro {
-  margin: 0;
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 18px;
+  .grade-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
