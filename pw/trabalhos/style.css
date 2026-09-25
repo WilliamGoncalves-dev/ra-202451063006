@@ -155,23 +155,12 @@ main {
 .lista, ul { margin: 0 0 12px; padding-left: 22px; }
 ol { margin: 0 0 12px; padding-left: 22px; }
 
-/* ---- Rodapé ---- */
-.rodape, footer {
-  background: #185016;
-  color: var(--cor-branco);
-  padding: var(--espaco-lg) var(--espaco-container);
-  font-size: var(--texto-sm);
-  text-align: center;
-}
-
-/* Código que a outra IA te passou (com uma pequena melhoria de estilo) */
 footer a {
-    color: var(--cor-branco);
-    text-decoration: none; /* Remove o risco padrão para o efeito funcionar */
+  color: var(--cor-branco);
 }
-
-footer a:hover, footer a:focus-visible {
-    text-decoration: underline; /* O risco aparece só quando passa o mouse */
+footer a:hover,
+footer a:focus-visible {
+  text-decoration: underline;
 }
 
 
