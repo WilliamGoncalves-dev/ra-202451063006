@@ -164,6 +164,17 @@ ol { margin: 0 0 12px; padding-left: 22px; }
   text-align: center;
 }
 
+/* Código que a outra IA te passou (com uma pequena melhoria de estilo) */
+footer a {
+    color: var(--cor-branco);
+    text-decoration: none; /* Remove o risco padrão para o efeito funcionar */
+}
+
+footer a:hover, footer a:focus-visible {
+    text-decoration: underline; /* O risco aparece só quando passa o mouse */
+}
+
+
 /* ---- Selo de status (peneiras.html, versão antiga em texto) ---- */
 .selo {
   display: inline-block;
