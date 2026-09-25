@@ -163,14 +163,12 @@ ol { margin: 0 0 12px; padding-left: 22px; }
   font-size: var(--texto-sm);
   text-align: center;
 }
-
-/* ---- Rodapé ---- */
-.rodape, footer {
-  background: #185016;
+footer a {
   color: var(--cor-branco);
-  padding: var(--espaco-lg) var(--espaco-container);
-  font-size: var(--texto-sm);
-  text-align: center;
+}
+footer a:hover,
+footer a:focus-visible {
+  text-decoration: underline;
 }
 
 /* ---- Selo de status (peneiras.html, versão antiga em texto) ---- */
