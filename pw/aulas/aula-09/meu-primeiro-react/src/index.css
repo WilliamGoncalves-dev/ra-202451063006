@@ -1,0 +1,21 @@
+body {
+     font-family: sans-serif;
+     padding: 24px;
+   }
+  
+   .titulo {
+     color: rebeccapurple;
+  }
+
+.lista {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 12px;
+   }
+   
+   .cartao {
+     border: 1px solid #ccc;
+     border-radius: 8px;
+    padding: 12px;
+    width: 220px;
+  }

@@ -1,0 +1,16 @@
+Responda:
+O que existe DENTRO do <div id="root"> no index.html? Então quem coloca o conteúdo na página?
+R: Ela está vazia inicialmente. O conteúdo é colocado na página pelo React, que renderiza os componentes dentro do <div id="root"> através do ReactDOM.render() ou do método createRoot().
+
+Teste e responda:
+Apague as chaves de {nome} e deixe só Olá, nome!. O que aparece na tela?
+
+R: Apareceu a função nome.toUpperCase() na tela, pois o React não consegue interpretar a função sem as chaves. Para que funcione corretamente, é necessário manter as chaves para que o React possa avaliar a expressão JavaScript e exibir o valor correto.
+
+Erro de propósito: troque para function saudacao() e <saudacao /> (minúsculo). O que aparece na tela? Abra o Console (F12) e anote o aviso. Depois volte para a maiúscula.
+
+R: @react-refresh:228 The tag <saudacao> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
+
+Acrescente um quarto <Saudacao /> SEM o atributo nome. O que aparece no lugar do nome? Deu erro?
+
+R: Apareceu "Olá, !" na tela, pois o componente Saudacao não recebeu o atributo nome. Não deu erro, mas o valor do nome ficou vazio.
