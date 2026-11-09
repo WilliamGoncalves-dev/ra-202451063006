@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "nome": "Vila Nova FC",
+    "cidade": "Nova Lima",
+    "uf": "MG",
+    "faixaEtaria": "Nascidos entre 2008 e 2014",
+    "posicoes": "Todas as posições",
+    "descricao": "Treino de força, fundamentos e resistência física.",
+    "status": "Em andamento"
+  },
+  {
+    "id": 2,
+    "nome": "Atlético Mineiro",
+    "cidade": "Belo Horizonte",
+    "uf": "MG",
+    "faixaEtaria": "Nascidos entre 2010 e 2014",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos técnicos, posicionamento e desenvolvimento coletivo.",
+    "status": "Inscrições abertas"
+  },
+  {
+    "id": 3,
+    "nome": "Cruzeiro",
+    "cidade": "Belo Horizonte",
+    "uf": "MG",
+    "faixaEtaria": "Nascidos entre 2011 e 2015",
+    "posicoes": "Todas as Posições",
+    "descricao": "Controle de bola, fundamentos técnicos e tomada de decisão.",
+    "status": "Em andamento"
+  },
+  {
+    "id": 4,
+    "nome": "América Mineiro",
+    "cidade": "Contagem",
+    "uf": "MG",
+    "faixaEtaria": "Nascidos entre 2009 e 2013",
+    "posicoes": "Todas as Posições",
+    "descricao": "Avaliação técnica, fundamentos e desempenho em situações de jogo.",
+    "status": "Inscrições abertas"
+  },
+  {
+    "id": 5,
+    "nome": "Vasco da Gama",
+    "cidade": "Rio de Janeiro",
+    "uf": "RJ",
+    "faixaEtaria": "Nascidos entre 2011 e 2015",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos técnicos, aspectos físicos e avaliação em campo.",
+    "status": "Em andamento"
+  },
+  {
+    "id": 6,
+    "nome": "Botafogo",
+    "cidade": "Rio de Janeiro",
+    "uf": "RJ",
+    "faixaEtaria": "Nascidos entre 2011 e 2015",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos, capacidade técnica e observação em situações de jogo.",
+    "status": "Inscrições abertas"
+  },
+  {
+    "id": 7,
+    "nome": "Fluminense",
+    "cidade": "Duque de Caxias",
+    "uf": "RJ",
+    "faixaEtaria": "Nascidos entre 2009 e 2015",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos técnicos, inteligência de jogo e desenvolvimento individual.",
+    "status": "Em andamento"
+  },
+  {
+    "id": 8,
+    "nome": "Palmeiras",
+    "cidade": "Guarulhos",
+    "uf": "SP",
+    "faixaEtaria": "Nascidos entre 2012 e 2016",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos técnicos, controle de bola e desenvolvimento por categoria.",
+    "status": "Inscrições abertas"
+  },
+  {
+    "id": 9,
+    "nome": "Corinthians",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "faixaEtaria": "Nascidos entre 2010 e 2014",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos técnicos, posicionamento e desempenho coletivo.",
+    "status": "Em andamento"
+  },
+  {
+    "id": 10,
+    "nome": "Santos FC",
+    "cidade": "Santos",
+    "uf": "SP",
+    "faixaEtaria": "Nascidos entre 2010 e 2014",
+    "posicoes": "Todas as Posições",
+    "descricao": "Controle de bola, drible, passe e desenvolvimento técnico.",
+    "status": "Inscrições abertas"
+  },
+  {
+    "id": 11,
+    "nome": "São Paulo FC",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "faixaEtaria": "Nascidos entre 2011 e 2015",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos, leitura de jogo e avaliação do desempenho individual.",
+    "status": "Em andamento"
+  },
+  {
+    "id": 12,
+    "nome": "Tupi",
+    "cidade": "Juiz de Fora",
+    "uf": "MG",
+    "faixaEtaria": "Nascidos entre 2010 e 2012",
+    "posicoes": "Zagueiros, Laterais e Meias",
+    "descricao": "Treino de força, fundamentos (interceptação, marcação defensiva, posicionamento) e resistência física.",
+    "status": "Criada"
+  },
+  {
+    "id": 13,
+    "nome": "Palmeiras",
+    "cidade": "Campinas",
+    "uf": "SP",
+    "faixaEtaria": "Nascidos entre 2014 e 2016",
+    "posicoes": "Atacantes, Alas e Meias",
+    "descricao": "Treino de força, fundamentos (Finalização, Passes, posicionamento) e resistência física.",
+    "status": "Finalizada"
+  }
+]
