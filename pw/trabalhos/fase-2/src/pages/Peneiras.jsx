@@ -1,6 +1,15 @@
+import { useState } from 'react';
+import FiltroPeneiras from '../components/FiltroPeneiras';
 import ListaPeneiras from '../components/ListaPeneiras';
 
 function Peneiras() {
+  const [filtros, setFiltros] = useState({ busca: '', status: '' });
+
+  function atualizarFiltro(evento) {
+    const { name, value } = evento.target;
+    setFiltros({ ...filtros, [name]: value });
+  }
+
   return (
     <section id="peneiras-perto-de-mim" aria-labelledby="titulo-peneiras">
       <h1 id="titulo-peneiras">Peneiras Perto de Mim</h1>
@@ -9,8 +18,10 @@ function Peneiras() {
         gratuitas — a única exigência é um quilo de alimento não perecível no dia
         da seleção.
       </p>
-      <ListaPeneiras />
+      <FiltroPeneiras filtros={filtros} onChange={atualizarFiltro} />
+      <ListaPeneiras filtros={filtros} />
     </section>
   );
 }
+
 export default Peneiras;
