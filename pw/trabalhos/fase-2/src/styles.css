@@ -241,6 +241,7 @@ footer a:focus-visible {
 
 .campo input[type="text"],
 .campo input[type="email"],
+.campo input[type="search"],
 .campo input[type="tel"],
 .campo input[type="date"],
 .campo select {
