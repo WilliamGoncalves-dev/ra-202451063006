@@ -62,7 +62,21 @@ python3 -m http.server 8000
   cores e espaçamento no CSS, corrigi duplicações de `<head>`/`<body>` que
   apareceram ao colar trechos que eu estava implementando, decidi a ordem das seções da landing page\
 
-## Fase 2 (a preencher)
+## Fase 2 (em preenchimento)
 
-- **URL pública da aplicação:** _(será adicionada quando o deploy da Fase 2 estiver
-  publicado)_
+### Pré-requisitos
+- Node.js (versão LTS recente) e npm
+
+### Instalação e execução
+    cd fase-2
+    npm install
+    npm run dev
+
+### Origem dos dados
+- As peneiras vêm de `fase-2/public/peneiras.json`, carregado com `fetch`
+  dentro de um `useEffect` em `src/components/ListaPeneiras.jsx`.
+- Enquanto carrega, a tela mostra "Carregando peneiras...".
+- Se o arquivo não carregar, aparece uma mensagem de erro no lugar da lista
+  e o site não quebra.
+- Se o arquivo vier vazio, aparece "Nenhuma peneira cadastrada no momento";
+  se os filtros não encontram nada, "Nenhuma peneira encontrada com esses filtros".
