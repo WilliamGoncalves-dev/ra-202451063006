@@ -27,6 +27,10 @@ function ListaPeneiras({ filtros }) {
     return <p role="alert" className="erro">{erro}</p>;
   }
 
+  if (peneiras.length === 0) {
+  return <p role="status">Nenhuma peneira cadastrada no momento.</p>;
+}
+
   const termo = filtros.busca.trim().toLowerCase();
 
   const filtradas = peneiras.filter((peneira) => {
