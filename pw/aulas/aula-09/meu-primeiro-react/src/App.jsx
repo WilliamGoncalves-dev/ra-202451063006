@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-   
-   import CartaoFilme from "./components/CartaoFilme";
+import CartaoFilme from "./components/CartaoFilme";
+import FormularioSugestao from "./components/FormularioSugestao";
    
    function App() {
      const [busca, setBusca] = useState("");
      const [filmes, setFilmes] = useState([]);
      const [carregando, setCarregando] = useState(true);
      const [erro, setErro] = useState("");
-
-     console.log("desenhou a tela");
   
      useEffect(() => {
         fetch("/filmes.json")
@@ -17,7 +15,7 @@ import { useState, useEffect } from "react";
             return resposta.json();
           })
           .then((dados) => setFilmes(dados))
-          .catch((e) => setErro("Erro ao carregar os filmes."))
+          .catch((e) => setErro(e.message))
           .finally(() => setCarregando(false));
      }, []);
 
@@ -26,6 +24,7 @@ import { useState, useEffect } from "react";
      );
 
      if (carregando) return <p>Carregando…</p>;
+     if (erro) return <p className="erro">Não foi possível carregar os filmes: {erro}</p>;
   
      return (
        <>
