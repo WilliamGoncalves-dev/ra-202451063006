@@ -26,6 +26,8 @@
   --cor-status-finalizada-fundo: #dcfce7;
   --cor-status-finalizada-texto: #166534;
   --cor-botao-info: #2e75b6;
+  --cor-erro-fundo: #fef2f2;
+  --cor-erro-escura: #991b1b;
 
   /* Tipografia */
   --fonte-base: system-ui, "Segoe UI", Arial, sans-serif;
@@ -361,6 +363,37 @@ legend {
   font-weight: 700;
   color: var(--cor-destaque-texto);
   padding: 0 var(--espaco-sm);
+}
+
+.carregando {
+  color: var(--cor-texto-dica);
+  font-style: italic;
+}
+
+.mensagem-erro {
+  background: var(--cor-erro-fundo);
+  border: 1px solid var(--cor-erro);
+  border-radius: var(--raio);
+  color: var(--cor-erro);
+  padding: var(--espaco-md) var(--espaco-lg);
+}
+
+.mensagem-erro p {
+  font-weight: 700;
+}
+
+.mensagem-erro button {
+  background: var(--cor-erro);
+  color: var(--cor-branco);
+  border: none;
+  padding: 10px var(--espaco-lg);
+  border-radius: var(--raio);
+  font-size: var(--texto-base);
+  font-weight: 700;
+  cursor: pointer;
+}
+.mensagem-erro button:hover {
+  background: var(--cor-erro-escura);
 }
 
 /* ==========================================================================
