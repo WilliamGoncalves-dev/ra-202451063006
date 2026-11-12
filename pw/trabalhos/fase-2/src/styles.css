@@ -349,6 +349,20 @@ button[type="submit"]:hover { background: var(--cor-primaria-escura); }
   font-weight: 700;
 }
 
+fieldset {
+  border: 1px solid var(--cor-borda-input);
+  border-radius: var(--raio);
+  padding: var(--espaco-md) var(--espaco-lg) var(--espaco-lg);
+  margin: 0 0 var(--espaco-lg);
+  min-width: 0; /* sem isso, fieldset pode estourar a largura em telas de 320px */
+}
+
+legend {
+  font-weight: 700;
+  color: var(--cor-destaque-texto);
+  padding: 0 var(--espaco-sm);
+}
+
 /* ==========================================================================
    BREAKPOINT 1 — tablets a partir de 600px
    ========================================================================== */

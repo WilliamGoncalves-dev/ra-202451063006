@@ -75,6 +75,7 @@ function validar(dados) {
 function FormularioInscricao() {
   const [dados, setDados] = useState(valoresIniciais);
   const [erros, setErros] = useState({});
+  const [enviado, setEnviado] = useState(false);
 
   function atualizar(evento) {
     const { name, value, type, checked } = evento.target;
@@ -284,21 +285,11 @@ function FormularioInscricao() {
       <button type="submit">Enviar inscrição</button>
     </form>
 
-        return (
-        <>
-          <form onSubmit={enviar} noValidate>
-            {/* ...tudo igual ao passo 1... */}
-          </form>
-
           <p id="mensagem-envio" role="status" className={enviado ? 'sucesso' : ''}>
             {enviado && 'Inscrição enviada com sucesso! Em breve você recebe a confirmação por e-mail.'}
           </p>
         </>
       );
-
-    </>
-
-  );
 }
 
 export default FormularioInscricao;
