@@ -6,6 +6,7 @@ const valoresIniciais = {
   email: '',
   telefone: '',
   posicao: '',
+  pe: '',
   experiencia: '',
   peneira: '',
   termo: false,
@@ -64,6 +65,9 @@ function validar(dados) {
   }
   if (!dados.peneira) {
     erros.peneira = 'Selecione a peneira de interesse.';
+  }
+  if (!dados.pe) {
+  erros.pe = 'Selecione o pé dominante.';
   }
   if (!dados.termo) {
     erros.termo = 'É necessário concordar com as diretrizes para continuar.';
@@ -201,6 +205,25 @@ function FormularioInscricao() {
             <option value="atacante">Atacante</option>
           </select>
           <p className="erro" id="erro-posicao" role="alert">{erros.posicao}</p>
+        </div>
+
+                <div className="campo">
+          <label htmlFor="pe">Pé dominante</label>
+          <select
+            id="pe"
+            name="pe"
+            value={dados.pe}
+            onChange={atualizar}
+            aria-invalid={Boolean(erros.pe)}
+            aria-describedby="erro-pe"
+            required
+          >
+            <option value="">Selecione...</option>
+            <option value="direito">Direito</option>
+            <option value="esquerdo">Esquerdo</option>
+            <option value="ambidestro">Ambidestro</option>
+          </select>
+          <p className="erro" id="erro-pe" role="alert">{erros.pe}</p>
         </div>
 
         <fieldset className="campo" aria-describedby="erro-experiencia">
