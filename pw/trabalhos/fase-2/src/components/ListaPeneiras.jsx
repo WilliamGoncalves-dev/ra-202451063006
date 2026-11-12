@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import PeneiraCard from './PeneiraCard';
+import Carregando from './Carregando';
+import MensagemErro from './MensagemErro';
 
 function ListaPeneiras({ filtros }) {
   const [peneiras, setPeneiras] = useState([]);
@@ -20,11 +22,11 @@ function ListaPeneiras({ filtros }) {
   }, []);
 
   if (carregando) {
-    return <p role="status">Carregando peneiras...</p>;
+    return <Carregando texto="Carregando peneiras..." />;
   }
 
   if (erro) {
-    return <p role="alert" className="erro">{erro}</p>;
+    return <MensagemErro mensagem={erro} />;
   }
 
   if (peneiras.length === 0) {
