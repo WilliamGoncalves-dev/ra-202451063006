@@ -11,21 +11,100 @@ const valoresIniciais = {
   termo: false,
 };
 
+function mascararTelefone(valor) {
+  const numeros = valor.replace(/\D/g, '').slice(0, 11);
+
+  if (numeros.length > 6) {
+    return numeros.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+  }
+  if (numeros.length > 2) {
+    return numeros.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+  }
+  if (numeros.length > 0) {
+    return numeros.replace(/(\d{0,2})/, '($1');
+  }
+  return '';
+}
+
+function calcularIdade(dataIso) {
+  const [ano, mes, dia] = dataIso.split('-').map(Number);
+  const hoje = new Date();
+
+  let idade = hoje.getFullYear() - ano;
+  const aniversarioJaPassou =
+    hoje.getMonth() + 1 > mes ||
+    (hoje.getMonth() + 1 === mes && hoje.getDate() >= dia);
+
+  if (!aniversarioJaPassou) idade--;
+  return idade;
+}
+
+function validar(dados) {
+  const erros = {};
+
+  if (dados.nome.trim().length < 3) {
+    erros.nome = 'Digite seu nome completo (mínimo 3 letras).';
+  }
+  if (!dados.nascimento) {
+    erros.nascimento = 'Informe sua data de nascimento.';
+  } else if (calcularIdade(dados.nascimento) < 6) {
+    erros.nascimento = 'É necessário ter pelo menos 6 anos completos para se inscrever.';
+  }
+  if (!/^\S+@\S+\.\S+$/.test(dados.email)) {
+    erros.email = 'Digite um e-mail válido.';
+  }
+  if (!/^\(\d{2}\) \d{5}-\d{4}$/.test(dados.telefone)) {
+    erros.telefone = 'Digite um telefone válido, com DDD.';
+  }
+  if (!dados.posicao) {
+    erros.posicao = 'Selecione sua posição principal.';
+  }
+  if (!dados.experiencia) {
+    erros.experiencia = 'Selecione uma opção.';
+  }
+  if (!dados.peneira) {
+    erros.peneira = 'Selecione a peneira de interesse.';
+  }
+  if (!dados.termo) {
+    erros.termo = 'É necessário concordar com as diretrizes para continuar.';
+  }
+
+  return erros;
+}
+
 function FormularioInscricao() {
   const [dados, setDados] = useState(valoresIniciais);
-  const [erros] = useState({});
+  const [erros, setErros] = useState({});
 
   function atualizar(evento) {
     const { name, value, type, checked } = evento.target;
-    setDados({ ...dados, [name]: type === 'checkbox' ? checked : value });
+    let novoValor = type === 'checkbox' ? checked : value;
+
+    if (name === 'telefone') {
+      novoValor = mascararTelefone(value);
+    }
+    setDados({ ...dados, [name]: novoValor });
   }
 
   function enviar(evento) {
     evento.preventDefault();
-    console.log(dados); // provisório: só para ver o estado funcionando
+    setEnviado(false)
+
+    const novosErros = validar(dados);
+    setErros(novosErros);
+
+    const camposComErro = Object.keys(novosErros);
+    if (camposComErro.lenght > 0) {
+      document.getElementById(camposComErro[0]).focus();
+      return;
+    }
+    console.log('Inscrição enviada:',dados); // provisório: só para ver o estado funcionando
+    setDados(valoresIniciais);
+    setEnviado(true);
   }
 
   return (
+    <>
     <form onSubmit={enviar} noValidate>
       <fieldset className="campos-grade">
         <legend>Dados do atleta</legend>
@@ -168,8 +247,18 @@ function FormularioInscricao() {
             <option value="">Selecione...</option>
             {/* PROVISÓRIO: lista repetida à mão. Sai daqui quando o Context existir. */}
             <option value="1">Vila Nova FC — Nova Lima/MG</option>
-            <option value="2">Tupi — Juiz de Fora/MG</option>
-            <option value="3">Palmeiras — Campinas/SP</option>
+            <option value="2">Atlético Mineiro — Belo Horizonte/MG</option>
+            <option value="3">Cruzeiro — Belo Horizonte/MG</option>
+            <option value="4">América Mineiro — Contagem/MG</option>
+            <option value="5">Vasco da Gama — Rio de Janeiro/RJ</option>
+            <option value="6">Botafogo — Rio de Janeiro/RJ</option>
+            <option value="7">Fluminense — Duque de Caxias/RJ</option>
+            <option value="8">Palmeiras — Guarulhos/SP</option>
+            <option value="9">Corinthians — São Paulo/SP</option>
+            <option value="10">Santos FC — Santos/SP</option>
+            <option value="11">São Paulo FC — São Paulo/SP</option>
+            <option value="12">Tupi — Juiz de Fora/MG</option>
+            <option value="13">Palmeiras — Campinas/SP</option>
           </select>
           <p className="erro" id="erro-peneira" role="alert">{erros.peneira}</p>
         </div>
@@ -194,6 +283,21 @@ function FormularioInscricao() {
 
       <button type="submit">Enviar inscrição</button>
     </form>
+
+        return (
+        <>
+          <form onSubmit={enviar} noValidate>
+            {/* ...tudo igual ao passo 1... */}
+          </form>
+
+          <p id="mensagem-envio" role="status" className={enviado ? 'sucesso' : ''}>
+            {enviado && 'Inscrição enviada com sucesso! Em breve você recebe a confirmação por e-mail.'}
+          </p>
+        </>
+      );
+
+    </>
+
   );
 }
 
