@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router';
+
 function Header() {
   return (
     <>
@@ -11,6 +13,15 @@ function Header() {
           O sonho do futebol para aqueles que ousaram sonhar
         </p>
       </header>
+
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><NavLink to="/" end>Início</NavLink></li>
+          <li><NavLink to="/peneiras">Peneiras Perto de Mim</NavLink></li>
+          <li><NavLink to="/inscricao">Inscrição do Atleta</NavLink></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
     </>
   );
 }
