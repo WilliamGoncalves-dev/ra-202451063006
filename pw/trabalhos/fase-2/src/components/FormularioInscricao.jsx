@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { usePeneiras } from '../context/PeneirasContext';
 
 const valoresIniciais = {
   nome: '',
@@ -80,6 +81,7 @@ function FormularioInscricao() {
   const [dados, setDados] = useState(valoresIniciais);
   const [erros, setErros] = useState({});
   const [enviado, setEnviado] = useState(false);
+  const { peneiras } = usePeneiras();
 
   function atualizar(evento) {
     const { name, value, type, checked } = evento.target;
@@ -99,7 +101,7 @@ function FormularioInscricao() {
     setErros(novosErros);
 
     const camposComErro = Object.keys(novosErros);
-    if (camposComErro.lenght > 0) {
+    if (camposComErro.length > 0) {
       document.getElementById(camposComErro[0]).focus();
       return;
     }
@@ -269,20 +271,11 @@ function FormularioInscricao() {
             required
           >
             <option value="">Selecione...</option>
-            {/* PROVISÓRIO: lista repetida à mão. Sai daqui quando o Context existir. */}
-            <option value="1">Vila Nova FC — Nova Lima/MG</option>
-            <option value="2">Atlético Mineiro — Belo Horizonte/MG</option>
-            <option value="3">Cruzeiro — Belo Horizonte/MG</option>
-            <option value="4">América Mineiro — Contagem/MG</option>
-            <option value="5">Vasco da Gama — Rio de Janeiro/RJ</option>
-            <option value="6">Botafogo — Rio de Janeiro/RJ</option>
-            <option value="7">Fluminense — Duque de Caxias/RJ</option>
-            <option value="8">Palmeiras — Guarulhos/SP</option>
-            <option value="9">Corinthians — São Paulo/SP</option>
-            <option value="10">Santos FC — Santos/SP</option>
-            <option value="11">São Paulo FC — São Paulo/SP</option>
-            <option value="12">Tupi — Juiz de Fora/MG</option>
-            <option value="13">Palmeiras — Campinas/SP</option>
+            {peneiras.map((peneira) => (
+              <option key={peneira.id} value={peneira.id}>
+                {peneira.nome} — {peneira.cidade}/{peneira.uf}
+              </option>
+            ))}
           </select>
           <p className="erro" id="erro-peneira" role="alert">{erros.peneira}</p>
         </div>
