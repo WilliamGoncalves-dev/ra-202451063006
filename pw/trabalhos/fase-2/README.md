@@ -80,3 +80,14 @@ python3 -m http.server 8000
   e o site não quebra.
 - Se o arquivo vier vazio, aparece "Nenhuma peneira cadastrada no momento";
   se os filtros não encontram nada, "Nenhuma peneira encontrada com esses filtros".
+
+  ### Uso de Context
+
+  As peneiras são carregadas uma única vez, no `PeneirasProvider`, e lidas
+  pelos componentes com o hook `usePeneiras()`. Hoje há dois consumidores em
+  rotas diferentes: a lista de peneiras (`ListaPeneiras`) e o `<select>` do
+  formulário de inscrição (`FormularioInscricao`). Sem o Context, cada tela
+  precisaria de um `fetch` próprio (com requisição repetida a cada navegação)
+  ou o estado teria de subir até o `App` e descer por props por componentes
+  que não usam o dado. Com o Context, a lista de peneiras tem uma única fonte
+  e o formulário deixou de repeti-la à mão.
