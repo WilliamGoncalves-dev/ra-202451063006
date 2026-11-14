@@ -74,7 +74,7 @@ python3 -m http.server 8000
 
 ### Origem dos dados
 - As peneiras vêm de `fase-2/public/peneiras.json`, carregado com `fetch`
-  dentro de um `useEffect` em `src/components/ListaPeneiras.jsx`.
+  dentro de um `useEffect` em `src/context/PeneirasContext.jsx`.
 - Enquanto carrega, a tela mostra "Carregando peneiras...".
 - Se o arquivo não carregar, aparece uma mensagem de erro no lugar da lista
   e o site não quebra.

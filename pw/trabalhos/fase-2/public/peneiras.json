@@ -20,6 +20,16 @@
     "status": "Inscrições abertas"
   },
   {
+    "id": 13,
+    "nome": "Atlético Goianiense",
+    "cidade": "Aparecida de Goiânia",
+    "uf": "GO",
+    "faixaEtaria": "Nascidos entre 2010 e 2014",
+    "posicoes": "Todas as Posições",
+    "descricao": "Fundamentos técnicos, posicionamento e desenvolvimento coletivo.",
+    "status": "Inscrições abertas"
+  },
+  {
     "id": 3,
     "nome": "Cruzeiro",
     "cidade": "Belo Horizonte",
