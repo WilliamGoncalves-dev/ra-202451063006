@@ -1,25 +1,10 @@
-import { useEffect, useState } from 'react';
 import PeneiraCard from './PeneiraCard';
 import Carregando from './Carregando';
 import MensagemErro from './MensagemErro';
+import { usePeneiras } from '../context/PeneirasContext';
 
 function ListaPeneiras({ filtros }) {
-  const [peneiras, setPeneiras] = useState([]);
-  const [carregando, setCarregando] = useState(true);
-  const [erro, setErro] = useState(null);
-
-  useEffect(() => {
-    fetch('/peneiras.json')
-      .then((resposta) => {
-        if (!resposta.ok) {
-          throw new Error('Resposta inválida do servidor');
-        }
-        return resposta.json();
-      })
-      .then((dados) => setPeneiras(dados))
-      .catch(() => setErro('Não foi possível carregar as peneiras. Tente novamente mais tarde.'))
-      .finally(() => setCarregando(false));
-  }, []);
+  const { peneiras, carregando, erro } = usePeneiras();
 
   if (carregando) {
     return <Carregando texto="Carregando peneiras..." />;
@@ -30,8 +15,8 @@ function ListaPeneiras({ filtros }) {
   }
 
   if (peneiras.length === 0) {
-  return <p role="status">Nenhuma peneira cadastrada no momento.</p>;
-}
+    return <p role="status">Nenhuma peneira cadastrada no momento.</p>;
+  }
 
   const termo = filtros.busca.trim().toLowerCase();
 
