@@ -101,3 +101,13 @@ python3 -m http.server 8000
 | `/peneiras/:id` | Detalhe de uma peneira |
 | `/inscricao` | Formulário de inscrição do atleta |
 | `*` | Página 404 |
+
+### Testes
+
+    cd fase-2
+    npm test
+
+Os testes usam Vitest e React Testing Library (ambiente jsdom) e cobrem:
+- `PeneiraCard`: dados exibidos e link para a página de detalhe;
+- `ListaPeneiras`: estados de carregando, erro, lista, filtro por busca e
+  por status, e aviso de nenhum resultado.
