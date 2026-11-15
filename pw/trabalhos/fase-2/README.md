@@ -91,3 +91,13 @@ python3 -m http.server 8000
   ou o estado teria de subir até o `App` e descer por props por componentes
   que não usam o dado. Com o Context, a lista de peneiras tem uma única fonte
   e o formulário deixou de repeti-la à mão.
+
+  ### Rotas
+
+| Rota | Página |
+|---|---|
+| `/` | Home (apresentação do projeto) |
+| `/peneiras` | Lista de peneiras com busca e filtro por status |
+| `/peneiras/:id` | Detalhe de uma peneira |
+| `/inscricao` | Formulário de inscrição do atleta |
+| `*` | Página 404 |
