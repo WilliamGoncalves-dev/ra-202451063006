@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Peneiras from './pages/Peneiras';
 import Inscricao from './pages/Inscricao';
 import NaoEncontrada from './pages/NaoEncontrada';
+import DetalhePeneira from './pages/DetalhePeneira';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/peneiras" element={<Peneiras />} />
+          <Route path="/peneiras/:id" element={<DetalhePeneira />} />
           <Route path="/inscricao" element={<Inscricao />} />
           <Route path="*" element={<NaoEncontrada />} />
         </Routes>

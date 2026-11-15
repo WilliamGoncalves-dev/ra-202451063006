@@ -429,3 +429,10 @@ legend {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.detalhes { margin: 0 0 var(--espaco-lg); }
+.detalhes dt { font-weight: 700; color: var(--cor-destaque-texto); }
+.detalhes dd { margin: 0 0 var(--espaco-md); }
+
+article h2 a { color: inherit; text-decoration-thickness: 2px; }
+article h2 a:hover { color: var(--cor-primaria); }
