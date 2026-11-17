@@ -42,9 +42,7 @@ Depois, acesse `http://localhost:5173` no navegador. Outros comandos:
   ### Uso de Context
 
   As peneiras são carregadas uma única vez, no `PeneirasProvider`, e lidas
-  pelos componentes com o hook `usePeneiras()`. Hoje há dois consumidores em
-  rotas diferentes: a lista de peneiras (`ListaPeneiras`) e o `<select>` do
-  formulário de inscrição (`FormularioInscricao`). Sem o Context, cada tela
+  pelos componentes com o hook `usePeneiras()`. Leem o mesmo dado: a lista, o detalhe, os destaques da Home, o filtro de município e o select do formulário. Sem o Context, cada tela
   precisaria de um `fetch` próprio (com requisição repetida a cada navegação)
   ou o estado teria de subir até o `App` e descer por props por componentes
   que não usam o dado. Com o Context, a lista de peneiras tem uma única fonte
@@ -55,7 +53,7 @@ Depois, acesse `http://localhost:5173` no navegador. Outros comandos:
 | Rota | Página |
 |---|---|
 | `/home` | Home (apresentação e peneiras em destaque) |
-| `/peneiras` | Lista de peneiras com busca e filtro por status |
+| `/peneiras` | Lista de peneiras com busca e filtros por município, status e pé dominante |
 | `/peneiras/:id` | Detalhe de uma peneira |
 | `/inscricao` | Formulário de inscrição do atleta |
 | `*` | Página 404 |
@@ -69,6 +67,7 @@ Depois, acesse `http://localhost:5173` no navegador. Outros comandos:
 
 Os testes usam Vitest e React Testing Library (ambiente jsdom) e cobrem:
 - `PeneiraCard`: dados exibidos e link para a página de detalhe;
+- `FiltroPeneiras`: opções de município sem repetição e aviso de mudança;
 - `ListaPeneiras`: estados de carregando, erro, lista, filtro por busca e
   por status, e aviso de nenhum resultado.
 
@@ -83,4 +82,4 @@ como `/peneiras/2` funcionem ao serem abertos direto.
 
 - **Ferramentas usadas:** Claude (Anthropic) e ChatGPT (OpenAI).
 - **Onde ajudou:** na Fase 1, em semântica do HTML, acessibilidade e validação do formulário em JavaScript; na Fase 2, em esqueletos e explicações de componentes React, Router, Context, testes com Vitest e configuração do deploy.
-- **O que eu revisei/reescrevi:** testei cada estado da tela (carregando, erro, vazio), encontrei e corrigi o bug em que o filtro não escondia os cards, publiquei e testei o deploy na Vercel e conferi o Lighthouse; acrescente o que você mesmo decidiu ou reescreveu
+- **O que eu revisei/reescrevi:** testei cada estado da tela (carregando, erro, vazio), encontrei e corrigi o bug em que o filtro não escondia os cards, publiquei e testei o deploy na Vercel e conferi o Lighthouse

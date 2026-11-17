@@ -24,10 +24,14 @@ function ListaPeneiras({ filtros }) {
     const bateBusca =
       peneira.nome.toLowerCase().includes(termo) ||
       peneira.cidade.toLowerCase().includes(termo);
-    const bateStatus =
-      filtros.status === '' || peneira.status === filtros.status;
+    const bateStatus = !filtros.status || peneira.status === filtros.status;
+    const bateCidade = !filtros.cidade || peneira.cidade === filtros.cidade;
+    const batePe =
+      !filtros.peDominante ||
+      peneira.peDominante === 'Livre' ||
+      peneira.peDominante === filtros.peDominante;
 
-    return bateBusca && bateStatus;
+    return bateBusca && bateStatus && bateCidade && batePe;
   });
 
   if (filtradas.length === 0) {
