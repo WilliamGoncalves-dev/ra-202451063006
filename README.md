@@ -22,7 +22,7 @@ npm run dev
 
 - **Ferramentas usadas:** Claude (Anthropic) e ChatGPT (OpenAI).
 - **Onde ajudou:** na Fase 1, em semântica do HTML, acessibilidade e validação do formulário em JavaScript; na Fase 2, em esqueletos e explicações de componentes React, Router, Context, testes com Vitest e configuração do deploy.
-- **O que eu revisei/reescrevi:** testei cada estado da tela (carregando, erro, vazio), encontrei e corrigi o bug em que o filtro não escondia os cards, publiquei e testei o deploy na Vercel e conferi o Lighthouse; acrescente o que você mesmo decidiu ou reescreveu
+- **O que eu revisei/reescrevi:** testei cada estado da tela (carregando, erro, vazio), encontrei e corrigi o bug em que o filtro não escondia os cards, publiquei e testei o deploy na Vercel e conferi o Lighthouse
 
 ## Disciplinas
 
