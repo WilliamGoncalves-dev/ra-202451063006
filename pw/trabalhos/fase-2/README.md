@@ -13,64 +13,22 @@ de cards e disponibiliza um formulário de inscrição com validação, permitin
 que o atleta se candidate informando seus dados, posição e a peneira de
 interesse.
 
-## Pré-requisitos
 
-- Um navegador atualizado (Chrome, Firefox, Edge ou Safari)
-- Não há dependências, build ou instalação de pacotes nesta fase — o projeto é
-  HTML, CSS e JavaScript puros
+## Fase 2 - Aplicação React publicada
 
-## Instalação e execução
-
-```bash
-# Clone o repositório
-git clone https://github.com/WilliamGoncalves-dev/ra-202451063006.git
-cd cd ra-202451063006
-
-# Abra o arquivo index.html diretamente no navegador
-# (duplo clique no arquivo, ou):
-xdg-open index.html      # Linux
-start index.html         # Windows
-open index.html          # macOS
-```
-
-Alternativamente, para evitar restrições de navegador com arquivos locais,
-rode um servidor estático simples na pasta do projeto:
-
-```bash
-python3 -m http.server 8000
-# depois acesse http://localhost:8000 no navegador
-```
-
-## Páginas do projeto
-
-| Página | Descrição |
-|---|---|
-| `index.html` | Landing page — o que é o projeto, como funciona, quem somos |
-| `peneiras.html` | Listagem das peneiras abertas, em cards |
-| `inscricao.html` | Formulário de inscrição do atleta, com validação |
-
-## Uso de IA
-
-- **Ferramentas usadas:** Claude (Anthropic), ChatGPT(OpenAI)
-- **Onde ajudou:** apoio na estruturação semântica do HTML (uso correto de
-  `header`, `nav`, `main`, `section`/`article`, `fieldset`/`legend`), nas
-  práticas de acessibilidade (labels associados, `aria-describedby`,
-  `aria-live`, foco visível, link de atalho) e na lógica de validação do
-  formulário em JavaScript (regras de campo obrigatório, máscara de telefone
-  via regex e cálculo de idade mínima).
-- **O que eu revisei/reescrevi:** \testei cada regra de validação, ajustei
-  cores e espaçamento no CSS, corrigi duplicações de `<head>`/`<body>` que
-  apareceram ao colar trechos que eu estava implementando, decidi a ordem das seções da landing page\
-
-## Fase 2 (em preenchimento)
+**URL pública:** https://ra-202451063006.vercel.app/
 
 ### Pré-requisitos
 - Node.js (versão LTS recente) e npm
 
 ### Instalação e execução
-    cd fase-2
+    git clone https://github.com/williamgoncalves-dev/ra-202451063006.git
+    cd ra-202451063006/pw/trabalhos/fase-2
     npm install
     npm run dev
+
+Depois, acesse `http://localhost:5173` no navegador. Outros comandos:
+`npm test` (testes) e `npm run build` (versão de produção, na pasta `dist/`).
 
 ### Origem dos dados
 - As peneiras vêm de `fase-2/public/peneiras.json`, carregado com `fetch`
@@ -104,10 +62,25 @@ python3 -m http.server 8000
 
 ### Testes
 
-    cd fase-2
+    ```bash
+    cd ra-202451063006/pw/trabalhos/fase-2
     npm test
+    ```
 
 Os testes usam Vitest e React Testing Library (ambiente jsdom) e cobrem:
 - `PeneiraCard`: dados exibidos e link para a página de detalhe;
 - `ListaPeneiras`: estados de carregando, erro, lista, filtro por busca e
   por status, e aviso de nenhum resultado.
+
+## Publicação
+
+A aplicação é publicada na Vercel, a cada `git push` na branch `main`, com Root
+Directory `pw/trabalhos/fase-2`, build `npm run build` e saída `dist`. O arquivo
+`vercel.json` redireciona qualquer rota para o `index.html`, para que endereços
+como `/peneiras/2` funcionem ao serem abertos direto.
+
+## Uso de IA
+
+- **Ferramentas usadas:** Claude (Anthropic) e ChatGPT (OpenAI).
+- **Onde ajudou:** na Fase 1, em semântica do HTML, acessibilidade e validação do formulário em JavaScript; na Fase 2, em esqueletos e explicações de componentes React, Router, Context, testes com Vitest e configuração do deploy.
+- **O que eu revisei/reescrevi:** testei cada estado da tela (carregando, erro, vazio), encontrei e corrigi o bug em que o filtro não escondia os cards, publiquei e testei o deploy na Vercel e conferi o Lighthouse; acrescente o que você mesmo decidiu ou reescreveu
