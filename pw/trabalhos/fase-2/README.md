@@ -54,7 +54,7 @@ Depois, acesse `http://localhost:5173` no navegador. Outros comandos:
 
 | Rota | Página |
 |---|---|
-| `/` | Home (apresentação do projeto) |
+| `/home` | Home (apresentação e peneiras em destaque) |
 | `/peneiras` | Lista de peneiras com busca e filtro por status |
 | `/peneiras/:id` | Detalhe de uma peneira |
 | `/inscricao` | Formulário de inscrição do atleta |
