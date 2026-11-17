@@ -18,6 +18,7 @@ const peneiras = [
     posicoes: 'Todas as posições',
     descricao: 'Treino de força.',
     status: 'Em andamento',
+    peDominante: 'Livre',
   },
   {
     id: 2,
@@ -28,10 +29,14 @@ const peneiras = [
     posicoes: 'Zagueiros, Laterais e Meias',
     descricao: 'Treino de fundamentos.',
     status: 'Criada',
+    peDominante: 'Esquerdo',
   },
 ];
 
-const semFiltro = { busca: '', status: '' };
+// no item 1 (Vila Nova FC):  peDominante: 'Livre',
+// no item 2 (Tupi):          peDominante: 'Esquerdo',
+
+const semFiltro = { busca: '', status: '', cidade: '', peDominante: '' };
 
 function renderizarLista(filtros = semFiltro) {
   return render(
@@ -82,6 +87,30 @@ describe('ListaPeneiras', () => {
 
     expect(screen.getAllByRole('article')).toHaveLength(1);
     expect(screen.getByRole('heading', { name: 'Vila Nova FC' })).toBeInTheDocument();
+  });
+
+  it('filtra os cards pelo município', () => {
+  usePeneiras.mockReturnValue({ peneiras, carregando: false, erro: null });
+  renderizarLista({ ...semFiltro, cidade: 'Juiz de Fora' });
+
+  expect(screen.getAllByRole('article')).toHaveLength(1);
+  expect(screen.getByRole('heading', { name: 'Tupi' })).toBeInTheDocument();
+  });
+
+  it('mostra peneiras de pé livre e de pé direito para um atleta destro', () => {
+    usePeneiras.mockReturnValue({ peneiras, carregando: false, erro: null });
+    renderizarLista({ ...semFiltro, peDominante: 'Direito' });
+
+    expect(screen.getAllByRole('article')).toHaveLength(1);
+    expect(screen.getByRole('heading', { name: 'Vila Nova FC' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Tupi' })).not.toBeInTheDocument();
+  });
+
+  it('mostra peneiras de pé livre e de pé esquerdo para um atleta canhoto', () => {
+    usePeneiras.mockReturnValue({ peneiras, carregando: false, erro: null });
+    renderizarLista({ ...semFiltro, peDominante: 'Esquerdo' });
+
+    expect(screen.getAllByRole('article')).toHaveLength(2);
   });
 
   it('avisa quando nenhum filtro encontra resultado', () => {
