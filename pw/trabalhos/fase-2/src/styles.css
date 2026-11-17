@@ -436,3 +436,8 @@ legend {
 
 article h2 a { color: inherit; text-decoration-thickness: 2px; }
 article h2 a:hover { color: var(--cor-primaria); }
+
+.filtro-peneiras .campo {
+  flex: 1 1 180px;
+  margin-bottom: 0;
+}
