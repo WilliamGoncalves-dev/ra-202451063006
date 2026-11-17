@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import PeneirasEmDestaque from '../components/PeneirasEmDestaque';
 
 function Home() {
   return (
@@ -15,6 +16,14 @@ function Home() {
           <Link className="botao botao-secundario" to="/peneiras">
             Ver peneiras abertas
           </Link>
+        </p>
+      </section>
+
+      <section aria-labelledby="titulo-destaques">
+        <h2 id="titulo-destaques">Peneiras em destaque</h2>
+        <PeneirasEmDestaque />
+        <p>
+          <Link to="/peneiras">Ver todas as peneiras</Link>
         </p>
       </section>
 
