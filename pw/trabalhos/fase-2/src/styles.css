@@ -242,10 +242,13 @@ footer a:focus-visible {
 .campo label { font-weight: 700; color: #1f3864; font-size: 14px; }
 
 .campo input[type="text"],
-.campo input[type="email"],
 .campo input[type="search"],
+.campo input[type="email"],
 .campo input[type="tel"],
 .campo input[type="date"],
+.campo input[type="number"],   /* ← nova */
+.campo input[type="url"],      /* ← nova */
+
 .campo select {
   width: 100%;
   max-width: 420px;
@@ -441,3 +444,4 @@ article h2 a:hover { color: var(--cor-primaria); }
   flex: 1 1 180px;
   margin-bottom: 0;
 }
+
