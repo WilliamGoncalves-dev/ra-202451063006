@@ -1,87 +1,32 @@
 import { useState } from 'react';
 import { usePeneiras } from '../context/PeneirasContext';
+import { mascararTelefone, validar } from '../utils/inscricao';
+import Campo from './Campo';
+
+const POSICOES = ['Goleiro', 'Zagueiro', 'Lateral', 'Volante', 'Meia', 'Ala', 'Atacante'];
+const PES = ['Direito', 'Esquerdo', 'Ambidestro'];
 
 const valoresIniciais = {
   nome: '',
   nascimento: '',
+  municipio: '',
   email: '',
   telefone: '',
+  peDominante: '',
   posicao: '',
-  pe: '',
-  experiencia: '',
+  posicaoSecundaria: '',
+  altura: '',
+  clubeAtual: '',
+  video: '',
   peneira: '',
   termo: false,
 };
 
-function mascararTelefone(valor) {
-  const numeros = valor.replace(/\D/g, '').slice(0, 11);
-
-  if (numeros.length > 6) {
-    return numeros.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
-  }
-  if (numeros.length > 2) {
-    return numeros.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-  }
-  if (numeros.length > 0) {
-    return numeros.replace(/(\d{0,2})/, '($1');
-  }
-  return '';
-}
-
-function calcularIdade(dataIso) {
-  const [ano, mes, dia] = dataIso.split('-').map(Number);
-  const hoje = new Date();
-
-  let idade = hoje.getFullYear() - ano;
-  const aniversarioJaPassou =
-    hoje.getMonth() + 1 > mes ||
-    (hoje.getMonth() + 1 === mes && hoje.getDate() >= dia);
-
-  if (!aniversarioJaPassou) idade--;
-  return idade;
-}
-
-function validar(dados) {
-  const erros = {};
-
-  if (dados.nome.trim().length < 3) {
-    erros.nome = 'Digite seu nome completo (mínimo 3 letras).';
-  }
-  if (!dados.nascimento) {
-    erros.nascimento = 'Informe sua data de nascimento.';
-  } else if (calcularIdade(dados.nascimento) < 6) {
-    erros.nascimento = 'É necessário ter pelo menos 6 anos completos para se inscrever.';
-  }
-  if (!/^\S+@\S+\.\S+$/.test(dados.email)) {
-    erros.email = 'Digite um e-mail válido.';
-  }
-  if (!/^\(\d{2}\) \d{5}-\d{4}$/.test(dados.telefone)) {
-    erros.telefone = 'Digite um telefone válido, com DDD.';
-  }
-  if (!dados.posicao) {
-    erros.posicao = 'Selecione sua posição principal.';
-  }
-  if (!dados.experiencia) {
-    erros.experiencia = 'Selecione uma opção.';
-  }
-  if (!dados.peneira) {
-    erros.peneira = 'Selecione a peneira de interesse.';
-  }
-  if (!dados.pe) {
-  erros.pe = 'Selecione o pé dominante.';
-  }
-  if (!dados.termo) {
-    erros.termo = 'É necessário concordar com as diretrizes para continuar.';
-  }
-
-  return erros;
-}
-
 function FormularioInscricao() {
+  const { peneiras } = usePeneiras();
   const [dados, setDados] = useState(valoresIniciais);
   const [erros, setErros] = useState({});
   const [enviado, setEnviado] = useState(false);
-  const { peneiras } = usePeneiras();
 
   function atualizar(evento) {
     const { name, value, type, checked } = evento.target;
@@ -90,12 +35,13 @@ function FormularioInscricao() {
     if (name === 'telefone') {
       novoValor = mascararTelefone(value);
     }
+
     setDados({ ...dados, [name]: novoValor });
   }
 
   function enviar(evento) {
     evento.preventDefault();
-    setEnviado(false)
+    setEnviado(false);
 
     const novosErros = validar(dados);
     setErros(novosErros);
@@ -105,207 +51,195 @@ function FormularioInscricao() {
       document.getElementById(camposComErro[0]).focus();
       return;
     }
-    console.log('Inscrição enviada:',dados); // provisório: só para ver o estado funcionando
+
+    // Simulação: ainda não há backend nesta fase.
+    console.log('Inscrição enviada:', dados);
     setDados(valoresIniciais);
     setEnviado(true);
   }
 
+  // Props que todo campo controlado repete: id, name, valor, onChange e acessibilidade.
+  function propsDoCampo(nome, comDica = false) {
+    return {
+      id: nome,
+      name: nome,
+      value: dados[nome],
+      onChange: atualizar,
+      'aria-invalid': Boolean(erros[nome]),
+      'aria-describedby': comDica ? `dica-${nome} erro-${nome}` : `erro-${nome}`,
+    };
+  }
+
   return (
     <>
-    <form onSubmit={enviar} noValidate>
-      <fieldset className="campos-grade">
-        <legend>Dados do atleta</legend>
+      <form onSubmit={enviar} noValidate>
+        <fieldset className="campos-grade">
+          <legend>Dados pessoais</legend>
 
-        <div className="campo campo-largo">
-          <label htmlFor="nome">Nome completo</label>
-          <input
-            id="nome"
-            name="nome"
-            type="text"
-            autoComplete="name"
-            value={dados.nome}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.nome)}
-            aria-describedby="erro-nome"
-            required
-          />
-          <p className="erro" id="erro-nome" role="alert">{erros.nome}</p>
-        </div>
+          <Campo id="nome" rotulo="Nome completo" erro={erros.nome} largo>
+            <input type="text" autoComplete="name" required {...propsDoCampo('nome')} />
+          </Campo>
 
-        <div className="campo">
-          <label htmlFor="nascimento">Data de nascimento</label>
-          <input
-            id="nascimento"
-            name="nascimento"
-            type="date"
-            autoComplete="bday"
-            value={dados.nascimento}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.nascimento)}
-            aria-describedby="erro-nascimento"
-            required
-          />
-          <p className="erro" id="erro-nascimento" role="alert">{erros.nascimento}</p>
-        </div>
+          <Campo id="nascimento" rotulo="Data de nascimento" erro={erros.nascimento}>
+            <input type="date" autoComplete="bday" required {...propsDoCampo('nascimento')} />
+          </Campo>
 
-        <div className="campo">
-          <label htmlFor="email">E-mail</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={dados.email}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.email)}
-            aria-describedby="dica-email erro-email"
-            required
-          />
-          <p className="dica" id="dica-email">Usaremos para enviar a confirmação da peneira.</p>
-          <p className="erro" id="erro-email" role="alert">{erros.email}</p>
-        </div>
-
-        <div className="campo">
-          <label htmlFor="telefone">Telefone (com DDD)</label>
-          <input
-            id="telefone"
-            name="telefone"
-            type="tel"
-            autoComplete="tel"
-            placeholder="(31) 91234-5678"
-            value={dados.telefone}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.telefone)}
-            aria-describedby="erro-telefone"
-            required
-          />
-          <p className="erro" id="erro-telefone" role="alert">{erros.telefone}</p>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Perfil como atleta</legend>
-
-        <div className="campo">
-          <label htmlFor="posicao">Posição principal</label>
-          <select
-            id="posicao"
-            name="posicao"
-            value={dados.posicao}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.posicao)}
-            aria-describedby="erro-posicao"
-            required
-          >
-            <option value="">Selecione...</option>
-            <option value="goleiro">Goleiro</option>
-            <option value="zagueiro">Zagueiro</option>
-            <option value="lateral">Lateral</option>
-            <option value="volante">Volante</option>
-            <option value="meia">Meia</option>
-            <option value="ala">Ala</option>
-            <option value="atacante">Atacante</option>
-          </select>
-          <p className="erro" id="erro-posicao" role="alert">{erros.posicao}</p>
-        </div>
-
-                <div className="campo">
-          <label htmlFor="pe">Pé dominante</label>
-          <select
-            id="pe"
-            name="pe"
-            value={dados.pe}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.pe)}
-            aria-describedby="erro-pe"
-            required
-          >
-            <option value="">Selecione...</option>
-            <option value="direito">Direito</option>
-            <option value="esquerdo">Esquerdo</option>
-            <option value="ambidestro">Ambidestro</option>
-          </select>
-          <p className="erro" id="erro-pe" role="alert">{erros.pe}</p>
-        </div>
-
-        <fieldset className="campo" aria-describedby="erro-experiencia">
-          <legend>Já jogou em alguma categoria de base de clube?</legend>
-          <label className="opcao-radio">
+          <Campo id="municipio" rotulo="Município de residência" erro={erros.municipio}>
             <input
-              id="experiencia"
-              name="experiencia"
-              type="radio"
-              value="sim"
-              checked={dados.experiencia === 'sim'}
-              onChange={atualizar}
+              type="text"
+              autoComplete="address-level2"
               required
-            />{' '}
-            Sim
-          </label>
-          <label className="opcao-radio">
-            <input
-              name="experiencia"
-              type="radio"
-              value="nao"
-              checked={dados.experiencia === 'nao'}
-              onChange={atualizar}
-            />{' '}
-            Não
-          </label>
-          <p className="erro" id="erro-experiencia" role="alert">{erros.experiencia}</p>
-        </fieldset>
-      </fieldset>
-
-      <fieldset>
-        <legend>Peneira de interesse</legend>
-
-        <div className="campo">
-          <label htmlFor="peneira">Qual peneira você quer participar?</label>
-          <select
-            id="peneira"
-            name="peneira"
-            value={dados.peneira}
-            onChange={atualizar}
-            aria-invalid={Boolean(erros.peneira)}
-            aria-describedby="erro-peneira"
-            required
-          >
-            <option value="">Selecione...</option>
-            {peneiras.map((peneira) => (
-              <option key={peneira.id} value={peneira.id}>
-                {peneira.nome} — {peneira.cidade}/{peneira.uf}
-              </option>
-            ))}
-          </select>
-          <p className="erro" id="erro-peneira" role="alert">{erros.peneira}</p>
-        </div>
-
-        <div className="campo campo-checkbox">
-          <label>
-            <input
-              id="termo"
-              name="termo"
-              type="checkbox"
-              checked={dados.termo}
-              onChange={atualizar}
-              aria-describedby="erro-termo"
-              required
+              {...propsDoCampo('municipio')}
             />
-            Li e estou de acordo com as diretrizes do Soccer Dream, incluindo a
-            doação de um quilo de alimento não perecível no dia da peneira.
-          </label>
-          <p className="erro" id="erro-termo" role="alert">{erros.termo}</p>
-        </div>
-      </fieldset>
+          </Campo>
 
-      <button type="submit">Enviar inscrição</button>
-    </form>
+          <Campo
+            id="email"
+            rotulo="E-mail"
+            dica="Usaremos para enviar a confirmação da peneira."
+            erro={erros.email}
+          >
+            <input type="email" autoComplete="email" required {...propsDoCampo('email', true)} />
+          </Campo>
 
-          <p id="mensagem-envio" role="status" className={enviado ? 'sucesso' : ''}>
-            {enviado && 'Inscrição enviada com sucesso! Em breve você recebe a confirmação por e-mail.'}
-          </p>
-        </>
-      );
+          <Campo id="telefone" rotulo="Telefone (com DDD)" erro={erros.telefone}>
+            <input
+              type="tel"
+              autoComplete="tel"
+              placeholder="(31) 91234-5678"
+              pattern="\(\d{2}\) \d{5}-\d{4}"
+              required
+              {...propsDoCampo('telefone')}
+            />
+          </Campo>
+        </fieldset>
+
+        <fieldset className="campos-grade">
+          <legend>Perfil como atleta</legend>
+
+          <Campo id="peDominante" rotulo="Pé dominante" erro={erros.peDominante}>
+            <select required {...propsDoCampo('peDominante')}>
+              <option value="">Selecione...</option>
+              {PES.map((pe) => (
+                <option key={pe} value={pe}>
+                  {pe}
+                </option>
+              ))}
+            </select>
+          </Campo>
+
+          <Campo id="posicao" rotulo="Posição principal" erro={erros.posicao}>
+            <select required {...propsDoCampo('posicao')}>
+              <option value="">Selecione...</option>
+              {POSICOES.map((posicao) => (
+                <option key={posicao} value={posicao}>
+                  {posicao}
+                </option>
+              ))}
+            </select>
+          </Campo>
+
+          <Campo
+            id="posicaoSecundaria"
+            rotulo="Posição secundária (opcional)"
+            erro={erros.posicaoSecundaria}
+          >
+            <select {...propsDoCampo('posicaoSecundaria')}>
+              <option value="">Nenhuma</option>
+              {POSICOES.map((posicao) => (
+                <option key={posicao} value={posicao}>
+                  {posicao}
+                </option>
+              ))}
+            </select>
+          </Campo>
+
+          <Campo
+            id="altura"
+            rotulo="Altura (cm)"
+            dica="Em centímetros, por exemplo 172."
+            erro={erros.altura}
+          >
+            <input
+              type="number"
+              inputMode="numeric"
+              min="100"
+              max="230"
+              step="1"
+              required
+              {...propsDoCampo('altura', true)}
+            />
+          </Campo>
+
+          <Campo
+            id="clubeAtual"
+            rotulo="Clube atual ou último clube (opcional)"
+            erro={erros.clubeAtual}
+            largo
+          >
+            <input type="text" {...propsDoCampo('clubeAtual')} />
+          </Campo>
+
+          <Campo
+            id="video"
+            rotulo="Link para vídeo de apresentação (opcional)"
+            dica="YouTube, Google Drive ou similar, com acesso liberado para quem tiver o link."
+            erro={erros.video}
+            largo
+          >
+            <input type="url" placeholder="https://" {...propsDoCampo('video', true)} />
+          </Campo>
+        </fieldset>
+
+        <fieldset className="campos-grade">
+          <legend>Peneira de interesse</legend>
+
+          <Campo
+            id="peneira"
+            rotulo="Qual peneira você quer participar?"
+            erro={erros.peneira}
+            largo
+          >
+            <select required {...propsDoCampo('peneira')}>
+              <option value="">Selecione...</option>
+              {peneiras.map((peneira) => (
+                <option key={peneira.id} value={peneira.id}>
+                  {peneira.nome} — {peneira.cidade}/{peneira.uf}
+                </option>
+              ))}
+            </select>
+          </Campo>
+
+          <div className="campo campo-largo campo-checkbox">
+            <label>
+              <input
+                id="termo"
+                name="termo"
+                type="checkbox"
+                checked={dados.termo}
+                onChange={atualizar}
+                aria-invalid={Boolean(erros.termo)}
+                aria-describedby="erro-termo"
+                required
+              />
+              Li e estou de acordo com as diretrizes do Soccer Dream, incluindo a
+              doação de um quilo de alimento não perecível no dia da peneira.
+            </label>
+            <p className="erro" id="erro-termo" role="alert">
+              {erros.termo}
+            </p>
+          </div>
+        </fieldset>
+
+        <button type="submit">Enviar inscrição</button>
+      </form>
+
+      <p id="mensagem-envio" role="status" className={enviado ? 'sucesso' : ''}>
+        {enviado &&
+          'Inscrição enviada com sucesso! Em breve você recebe a confirmação por e-mail.'}
+      </p>
+    </>
+  );
 }
 
 export default FormularioInscricao;
