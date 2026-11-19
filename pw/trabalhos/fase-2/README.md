@@ -39,6 +39,20 @@ Depois, acesse `http://localhost:5173` no navegador. Outros comandos:
 - Se o arquivo vier vazio, aparece "Nenhuma peneira cadastrada no momento";
   se os filtros não encontram nada, "Nenhuma peneira encontrada com esses filtros".
 
+## Formulário de inscrição
+
+Formulário controlado (um objeto de estado, `name` igual à chave e um único
+`onChange`) com os campos previstos na proposta: nome, data de nascimento,
+município, pé dominante, posição principal e secundária, altura, clube atual,
+link de vídeo e peneira, além de e-mail, telefone e aceite das diretrizes.
+
+As regras ficam em `src/utils/inscricao.js` (máscara de telefone, idade mínima de
+6 anos, altura entre 100 e 230 cm, posição secundária diferente da principal e
+link de vídeo com http/https). Os atributos nativos (`required`, `type`,
+`pattern`, `min`, `max`) ficam no HTML; o `noValidate` desliga os balões do
+navegador para que as mensagens sejam as do site, ligadas aos campos por
+`aria-describedby`. O envio é simulado, pois não há backend.
+
   ### Uso de Context
 
   As peneiras são carregadas uma única vez, no `PeneirasProvider`, e lidas

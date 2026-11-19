@@ -15,7 +15,7 @@ function FiltroPeneiras({ filtros, onChange }) {
       onSubmit={(evento) => evento.preventDefault()}
     >
       <div className="campo">
-        <label htmlFor="busca">Buscar por nome ou cidade</label>
+        <label htmlFor="busca">Buscar por nome, posição ou cidade</label>
         <input
           id="busca"
           name="busca"

@@ -3,7 +3,12 @@ import FiltroPeneiras from '../components/FiltroPeneiras';
 import ListaPeneiras from '../components/ListaPeneiras';
 
 function Peneiras() {
-  const [filtros, setFiltros] = useState({ busca: '', status: '' });
+  const [filtros, setFiltros] = useState({
+    busca: '',
+    status: '',
+    cidade: '',
+    peDominante: '',
+  });
 
   function atualizarFiltro(evento) {
     const { name, value } = evento.target;

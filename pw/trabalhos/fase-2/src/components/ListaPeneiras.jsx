@@ -23,7 +23,8 @@ function ListaPeneiras({ filtros }) {
   const filtradas = peneiras.filter((peneira) => {
     const bateBusca =
       peneira.nome.toLowerCase().includes(termo) ||
-      peneira.cidade.toLowerCase().includes(termo);
+      peneira.cidade.toLowerCase().includes(termo)||
+      peneira.posicoes.toLowerCase().includes(termo);;
     const bateStatus = !filtros.status || peneira.status === filtros.status;
     const bateCidade = !filtros.cidade || peneira.cidade === filtros.cidade;
     const batePe =
