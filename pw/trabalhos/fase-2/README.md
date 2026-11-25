@@ -53,7 +53,12 @@ link de vídeo com http/https). Os atributos nativos (`required`, `type`,
 navegador para que as mensagens sejam as do site, ligadas aos campos por
 `aria-describedby`. O envio é simulado, pois não há backend.
 
-  ### Uso de Context
+  ### Context
+
+  - **Qual:** `PeneirasContext` (`src/context/PeneirasContext.jsx`), com o hook `usePeneiras()`.
+  - **O que guarda:** a lista de peneiras carregada do JSON, o estado de carregamento e o erro.
+  - **Quem usa:** `ListaPeneiras` (dentro de `Peneiras`, rota `/peneiras`) e `FormularioInscricao` (dentro de `Inscricao`, rota `/inscricao`); também `FiltroPeneiras`, `PeneirasEmDestaque` (Home) e `DetalhePeneira` (rota `/peneiras/:id`).
+  - **Por que Context e não props:** o estado teria de ficar no `App` e descer por `Peneiras`, `Inscricao` e `Home`, que só repassariam o dado sem usá-lo. Além disso, ele precisa ficar acima das rotas: com o Context, trocar de página não refaz o `fetch` nem perde a lista.
 
   As peneiras são carregadas uma única vez, no `PeneirasProvider`, e lidas
   pelos componentes com o hook `usePeneiras()`. Leem o mesmo dado: a lista, o detalhe, os destaques da Home, o filtro de município e o select do formulário. Sem o Context, cada tela
