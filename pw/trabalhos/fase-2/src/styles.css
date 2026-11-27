@@ -445,3 +445,11 @@ article h2 a:hover { color: var(--cor-primaria); }
   margin-bottom: 0;
 }
 
+.filtro-peneiras {
+  display: flex;
+  gap: var(--espaco-md);
+  flex-wrap: wrap;
+  margin: var(--espaco-lg) 0;
+  align-items: flex-end;   /* nova */
+}
+
